@@ -3,5 +3,5 @@ Given(/^Tammy visits the home page$/) do
 end
 
 Then(/^Tammy should see the title of the list$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  expect(page).to have_content('Top Ten Trending Videos On YouTube')
 end
