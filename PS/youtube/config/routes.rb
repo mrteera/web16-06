@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'problem_sets/index'
+  root 'problem_sets#index'
 
   get 'youtube_trends' , to: 'youtube_trends#index'
 

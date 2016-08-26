@@ -1,5 +1,9 @@
-Given(/^Tammy visits PS1 page$/) do
-  visit '/youtube_trends'
+Given(/^Tammy visits home page$/) do
+  visit '/'
+end
+
+Then(/^Tammy clicks PS(\d+) link$/) do |arg1|
+  click_link 'PS1'
 end
 
 Then(/^Tammy should see the title of the list$/) do
