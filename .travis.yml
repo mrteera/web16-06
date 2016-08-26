@@ -3,6 +3,9 @@ language: ruby
 addons:
   postgresql: "9.5"
 
+before_script:
+  - psql -c 'create database youtube_test;' -U postgres
+
 rvm:
   - 2.3.1
 
