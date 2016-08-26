@@ -2,5 +2,5 @@
 
 rubocop -RDS --fail-fast && \
 haml-lint app/views/ && \
-rails test && \
+rails test -f && \
 rails cucumber

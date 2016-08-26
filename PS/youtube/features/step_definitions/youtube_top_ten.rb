@@ -12,4 +12,5 @@ end
 
 Then(/^Tammy should see all (\d+) titles of the videos$/) do # |arg1|
   pending # Write code here that turns the phrase above into concrete actions
+  # expect(page).to have_content("Some Content")
 end
