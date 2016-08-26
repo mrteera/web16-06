@@ -1,5 +1,5 @@
-Given(/^Tammy visits the home page$/) do
-  visit '/'
+Given(/^Tammy visits PS1 page$/) do
+  visit '/youtube_trends'
 end
 
 Then(/^Tammy should see the title of the list$/) do
