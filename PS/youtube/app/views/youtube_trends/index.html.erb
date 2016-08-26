@@ -1,18 +1,10 @@
-<html lang="th">
-<head>
-  <meta charset="UTF-8" />
-  <title>Document</title>
-</head>
-<body>
-  <h1>Top Ten Trending Videos On YouTube</h1>
-  <ol>
-    <% @top_ten_videos.each do |element| %>
-      <li>
-        <%= element[0] %>
-        <br />
-        <a href="<%= element[2] %>"><img src="<%= element[1] %>" alt="MDN"></a>
-      </li>
-    <% end %>
-  </ol>
-</body>
-</html>
+<h1>Top Ten Trending Videos On YouTube</h1>
+<ol>
+  <% @top_ten_videos.each do |element| %>
+    <li>
+      <%= element[0] %>
+      <br />
+      <a href="<%= element[2] %>"><img src="<%= element[1] %>" alt="MDN"></a>
+    </li>
+  <% end %>
+</ol>
