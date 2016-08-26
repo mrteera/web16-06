@@ -87,5 +87,5 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
-PS1/youtube/.idea/
-.idea
+PS/youtube/.idea/
+PS/youtube/coverage/
