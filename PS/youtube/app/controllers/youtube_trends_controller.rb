@@ -2,6 +2,7 @@
 # from top ten trending videos on YouTube.
 class YoutubeTrendsController < ApplicationController
   def index
+    @top_ten_videos = top_ten_youtube
   end
 
   def youtube_trending
