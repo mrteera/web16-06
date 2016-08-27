@@ -36,7 +36,7 @@ class YoutubeTrendsController < ApplicationController
   end
 
   def divided_by_zero
-    # logger.error 'About to divide by zero'
+    logger.error 'About to divide by zero'
     1 / 0
   end
 end

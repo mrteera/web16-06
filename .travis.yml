@@ -21,7 +21,7 @@ before_script:
   - cd PS/youtube
   - bundle install --jobs=3 --retry=3
   - rails db:migrate
-  - rails server &
+  - RAILS_ENV=development rails server &
 script:
   - rubocop -RDS
   - haml-lint app/views/
