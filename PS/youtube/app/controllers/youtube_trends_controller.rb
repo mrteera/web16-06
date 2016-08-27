@@ -34,4 +34,9 @@ class YoutubeTrendsController < ApplicationController
   def top_ten_youtube
     titles.zip(thumbnail_urls, video_urls).first(10)
   end
+
+  def divided_by_zero
+    logger.error 'About to divide by zero'
+    1 / 0
+  end
 end
