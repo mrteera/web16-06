@@ -47,6 +47,10 @@ class YoutubeTrendsControllerTest < ActionDispatch::IntegrationTest
     assert_equal(expected, actual)
   end
 
+  def test_divided_by_zero_should_raise_ZeroDivisionError
+    assert_raises(ZeroDivisionError) { @top_ten_videos.divided_by_zero}
+  end
+
   test 'should get index' do
     get youtube_trends_index_url
     assert_response :success
