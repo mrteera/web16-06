@@ -1,9 +1,9 @@
-<div id="pgTitle" style="text-align: center; padding: 20px"><h2>Top Ten Trending Videos On <span style="color:#cc181e">YouTube</span></h2></div>
+<div id="pgTitle" style="text-align: center; padding-bottom: 20px"><h2>Top Ten Trending Videos On <span style="color:#cc181e">YouTube</span></h2></div>
 
 <div id="pgContent">
   <ol>
     <% @top_ten_youtube.each do |video| %>
-    <li style="padding-bottom: 10px">
+    <li style="padding-bottom: 15px">
       <%= video[0] %>
       <a href="<%= video[2] %>" title="<%= video[0] %>"><br>
         <img src="<%= video[1] %>" alt="<%= video[0] %>" width="300">
