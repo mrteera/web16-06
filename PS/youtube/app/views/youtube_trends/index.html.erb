@@ -1,12 +1,12 @@
-<div id="pgTitle">Top Ten Trending Videos On YouTube</div>
+<div id="pgTitle"><h3>Top Ten Trending Videos On <span styele="color:#cc181e"></span>YouTube</h3></div>
 
 <div id="pgContent">
   <ol>
     <% @top_ten_youtube.each do |video| %>
     <li>
       <%= video[0] %>
-      <a href="<%= video[2] %>" title="<%= video[0] %>">
-        <img src="<%= video[1] %>" alt="<%= video[0] %>">
+      <a href="<%= video[2] %>" title="<%= video[0] %>"><br>
+        <img src="<%= video[1] %>" alt="<%= video[0] %>" width="300">
       </a>
     </li>
     <% end %>
