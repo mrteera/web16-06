@@ -3,12 +3,11 @@
   <head>
     <title>Web6 Projects</title>
     <%= csrf_meta_tags %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body  style="color:#333; font-family: Verdana, Arial, Helvetica, sans-serif">
     <%= yield %>
     <%= render 'layouts/footer' %>
   </body>
