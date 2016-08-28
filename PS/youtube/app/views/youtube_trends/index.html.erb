@@ -1,3 +1,14 @@
-Top Ten Trending Videos On YouTube
+<div id="pgTitle">Top Ten Trending Videos On YouTube</div>
 
-<%= @video_title %>
+<div id="pgContent">
+  <ol>
+    <% @top_ten_youtube.each do |video| %>
+    <li>
+      <%= video[0] %>
+      <a href="<%= video[2] %>" target="_new" title="<%= video[0] %>">
+        <img src="<%= video[1] %>">
+      </a>
+    </li>
+    <% end %>
+  </ol>
+</div>
