@@ -5,8 +5,8 @@
     <% @top_ten_youtube.each do |video| %>
     <li>
       <%= video[0] %>
-      <a href="<%= video[2] %>" target="_new" title="<%= video[0] %>">
-        <img src="<%= video[1] %>">
+      <a href="<%= video[2] %>" title="<%= video[0] %>">
+        <img src="<%= video[1] %>" alt="<%= video[0] %>">
       </a>
     </li>
     <% end %>
