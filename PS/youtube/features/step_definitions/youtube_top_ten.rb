@@ -15,5 +15,5 @@ Then(/^Tammy should see all (\d+) titles of the videos$/) do |number_of_videos|
 end
 
 Then(/^Tammy clicks Youtube Top Trends link$/) do
-    click_link 'Youtube Top Trends'
+  click_link 'Youtube Top Trends'
 end
