@@ -91,3 +91,5 @@ PS/youtube/.idea/
 PS/youtube/coverage/
 
 .DS_Store
+
+PS/youtube/public/report
