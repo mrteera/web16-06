@@ -1,0 +1,36 @@
+mrteera=# create database investmenta
+CREATE DATABASE
+
+mrteera=# \c investment
+You are now connected to database "investment" as user "mrteera".
+
+investment=# create table my_stocks (
+investment(# symbol varchar(20) not null,
+investment(# n_shares integer not null,
+investment(# date_acquired date not null
+investment(# );
+CREATE TABLE
+
+investment=# \d my_stocks
+             Table "public.my_stocks"
+    Column     |         Type          | Modifiers 
+---------------+-----------------------+-----------
+ symbol        | character varying(20) | not null
+ n_shares      | integer               | not null
+ date_acquired | date                  | not null
+
+investment=# copy my_stocks from '/Users/mrteera/Workspace/web16-06/PS/PS2/public/report/my_stock.txt' (delimiter E'\t');
+COPY 5
+
+# https://www.postgresql.org/docs/current/static/sql-copy.html
+# http://stackoverflow.com/a/6113351/1971997
+
+investment=# select * from my_stocks;
+ symbol | n_shares | date_acquired 
+--------+----------+---------------
+ ADVANC |      100 | 2016-08-31
+ KBANK  |      100 | 2016-08-31
+ SCB    |      100 | 2016-08-31
+ BTS    |      100 | 2016-08-31
+ BANPU  |      100 | 2016-08-31
+(5 rows)
