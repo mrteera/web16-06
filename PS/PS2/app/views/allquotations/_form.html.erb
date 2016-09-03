@@ -1,0 +1,33 @@
+<%= form_for(allquotation) do |f| %>
+  <% if allquotation.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(allquotation.errors.count, "error") %> prohibited this allquotation from being saved:</h2>
+
+      <ul>
+      <% allquotation.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :quote %>
+    <%= f.text_field :quote %>
+  </div>
+
+  <div class="field">
+    <%= f.label :author %>
+    <%= f.text_field :author %>
+  </div>
+
+  <div class="field">
+    <%= f.label :categories_title  %>
+    <%= f.collection_select(:categories_id, Category.all+[Category.new(id:-1, title: "New Category")], :id, :title) %>
+    <%= text_field_tag :categories_title %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

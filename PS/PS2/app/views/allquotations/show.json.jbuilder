@@ -1,0 +1,1 @@
+json.partial! "allquotations/allquotation", allquotation: @allquotation

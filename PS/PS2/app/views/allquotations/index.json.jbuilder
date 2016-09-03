@@ -1,0 +1,1 @@
+json.array! @allquotations, partial: 'allquotations/allquotation', as: :allquotation

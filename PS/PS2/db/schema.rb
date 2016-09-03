@@ -10,10 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160903064019) do
+ActiveRecord::Schema.define(version: 20160903072754) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "allquotations", force: :cascade do |t|
+    t.string   "quote"
+    t.string   "author"
+    t.integer  "categories_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["categories_id"], name: "index_allquotations_on_categories_id", using: :btree
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string   "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "projects", force: :cascade do |t|
     t.string   "name"
@@ -37,4 +52,5 @@ ActiveRecord::Schema.define(version: 20160903064019) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "allquotations", "categories", column: "categories_id"
 end
