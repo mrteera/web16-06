@@ -3,9 +3,9 @@
 one:
   quote: MyString
   author: MyString
-  category: MyString
+  category: one
 
 two:
   quote: MyString
   author: MyString
-  category: MyString
+  category: two

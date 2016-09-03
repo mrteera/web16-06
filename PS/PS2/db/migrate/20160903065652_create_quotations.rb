@@ -3,7 +3,7 @@ class CreateQuotations < ActiveRecord::Migration[5.0]
     create_table :quotations do |t|
       t.string :quote
       t.string :author
-      t.string :category
+      t.references :category, foreign_key: true
 
       t.timestamps
     end

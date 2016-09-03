@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160903063358) do
+ActiveRecord::Schema.define(version: 20160903064019) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,14 @@ ActiveRecord::Schema.define(version: 20160903063358) do
   end
 
   create_table "quotation_dbs", force: :cascade do |t|
+    t.string   "quote"
+    t.string   "author"
+    t.string   "category"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "quotations", force: :cascade do |t|
     t.string   "quote"
     t.string   "author"
     t.string   "category"
