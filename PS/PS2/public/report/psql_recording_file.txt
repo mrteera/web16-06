@@ -130,3 +130,36 @@ investment=# select my_stocks.symbol, n_shares as number_of_shares, price as pri
  BANPU  |              100 |          31.415 |      3141.500
  AAPL   |               10 |                 |              
 (6 rows)
+
+# -----------------------------------------------------------------------------
+# 11)
+
+investment=# create or replace function stock_value( symbol varchar ) returns integer as $$declare  stock_value integer := 0;  symbol_length integer;  count integer := 0;  stock_char char(1);begin  symbol_length := length(symbol);  while (count < symbol_length)  loop    count := count + 1;    stock_char := substr(symbol, count, 1);     stock_value := stock_value + ascii(stock_char);   end loop;  return stock_value;end;$$ language plpgsql;
+CREATE FUNCTION
+
+investment=# select stock_value('IBM');
+ stock_value 
+-------------
+         216
+(1 row)
+
+investment=# update stock_prices set price = stock_value(symbol);
+UPDATE 5
+investment=# select * from stock_prices;
+ symbol | quote_date | price 
+--------+------------+-------
+ ADVANC | 2016-09-04 |   429
+ KBANK  | 2016-09-04 |   359
+ SCB    | 2016-09-04 |   216
+ BTS    | 2016-09-04 |   233
+ BANPU  | 2016-09-04 |   374
+(5 rows)
+
+investment=# create or replace function portfolio_value()returns real as $$declare  aggregate_value real := 0;  cur_row RECORD;  curs CURSOR FOR select my_stocks.symbol, n_shares as number_of_shares, price as price_per_share, n_shares * price as current_value from my_stocks join stock_prices on my_stocks.symbol = stock_prices.symbol;begin  OPEN curs;  LOOP    FETCH curs INTO cur_row;    exit when not found;    aggregate_value := aggregate_value + cur_row.current_value;  END LOOP;  return aggregate_value;end;$$ language plpgsql;
+CREATE FUNCTION
+
+investment=# select portfolio_value();                                                                                                                                             portfolio_value 
+-----------------
+          161100
+(1 row)
+
