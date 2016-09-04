@@ -5,6 +5,7 @@ class QuotationsController < ApplicationController
   # GET /quotations.json
   def index
     @quotations = Quotation.all
+    @quotation = Quotation.all
   end
 
   # GET /quotations/1
@@ -57,6 +58,17 @@ class QuotationsController < ApplicationController
     end
   end
 
+  def search
+    respond_to do |format|
+      logger.debug(">>>")
+      logger.debug(params[:q])
+      @quotations=Quotation.where('quote like ? OR author_name like ?','%'+params[:q]+'%','%'+params[:q]+'%') #,find_by_quote(params[:q])
+      logger.debug(@quotations)
+      format.html { render :index }
+    end
+
+  end
+
   # DELETE /quotations/1
   # DELETE /quotations/1.json
   def destroy
@@ -66,6 +78,7 @@ class QuotationsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
