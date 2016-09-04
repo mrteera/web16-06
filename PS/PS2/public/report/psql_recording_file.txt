@@ -107,3 +107,26 @@ investment=# select my_stocks.symbol, n_shares as number_of_shares, price as pri
 
 # -----------------------------------------------------------------------------
 # 10)
+investment=# insert into my_stocks values ('AAPL', 10, current_date);
+INSERT 0 1
+
+investment=# select my_stocks.symbol, n_shares as number_of_shares, price as price_per_share, n_shares * price as current_value from my_stocks join stock_prices on my_stocks.symbol = stock_prices.symbol;
+ symbol | number_of_shares | price_per_share | current_value 
+--------+------------------+-----------------+---------------
+ ADVANC |              100 |          31.415 |      3141.500
+ KBANK  |              100 |          31.415 |      3141.500
+ SCB    |              100 |          31.415 |      3141.500
+ BTS    |              100 |          31.415 |      3141.500
+ BANPU  |              100 |          31.415 |      3141.500
+(5 rows)
+
+investment=# select my_stocks.symbol, n_shares as number_of_shares, price as price_per_share, n_shares * price as current_value from my_stocks full outer join stock_prices on my_stocks.symbol = stock_prices.symbol;
+ symbol | number_of_shares | price_per_share | current_value 
+--------+------------------+-----------------+---------------
+ ADVANC |              100 |          31.415 |      3141.500
+ KBANK  |              100 |          31.415 |      3141.500
+ SCB    |              100 |          31.415 |      3141.500
+ BTS    |              100 |          31.415 |      3141.500
+ BANPU  |              100 |          31.415 |      3141.500
+ AAPL   |               10 |                 |              
+(6 rows)
