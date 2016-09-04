@@ -81,6 +81,15 @@ class QuotationsController < ApplicationController
     end
   end
 
+  def quotation_cookie_erase
+    respond_to do |format|
+      @quotations=Quotation.all
+      #cookies[:killedQuoteArr]={:expires=> 1.hour.ago} same result as delete
+      cookies.delete :killedQuoteArr
+      format.html { render :index }
+    end
+  end
+
   # DELETE /quotations/1
   # DELETE /quotations/1.json
   def destroy

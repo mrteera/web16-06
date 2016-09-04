@@ -9,6 +9,8 @@
   </head>
 
   <body>
+
     <%= yield %>
+    <%= link_to 'Erase my personalization', controller:"quotations", action:"quotation_cookie_erase" %>
   </body>
 </html>
