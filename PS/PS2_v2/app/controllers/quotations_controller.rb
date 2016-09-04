@@ -4,8 +4,11 @@ class QuotationsController < ApplicationController
   # GET /quotations
   # GET /quotations.json
   def index
-    @quotations = Quotation.all
-    @quotation = Quotation.all
+    if cookies[:killedQuoteArr] == nil
+      cookies[:killedQuoteArr]=JSON.generate([])
+    end
+    @quotations = Quotation.where.not(id:JSON.parse(cookies[:killedQuoteArr]))
+    @quotation = Quotation.where.not(id:JSON.parse(cookies[:killedQuoteArr]))
   end
 
   # GET /quotations/1
@@ -60,20 +63,19 @@ class QuotationsController < ApplicationController
 
   def search
     respond_to do |format|
-      logger.debug(">>>")
-      logger.debug(params[:q])
       @quotations=Quotation.where('lower(quote) like ? OR lower(author_name) like ?','%'+params[:q].downcase+'%','%'+params[:q].downcase+'%') #,find_by_quote(params[:q])
-      logger.debug(@quotations)
       format.html { render :index }
     end
   end
 
   def kill
-    puts 'hello---------------------------------------------------'
-    puts @quotation.class
     respond_to do |format|
-      cookies[:killedQuote]=@quotation.to_s#1#params[:id]
-      @quotations=Quotation.where.not(id:1)
+      if cookies[:killedQuoteArr] == nil
+        cookies[:killedQuoteArr]=JSON.generate([params[:pass]])
+      else
+        cookies[:killedQuoteArr]=JSON.generate(JSON.parse(cookies[:killedQuoteArr]) << params[:pass])
+      end
+     @quotations=Quotation.where.not(id:JSON.parse(cookies[:killedQuoteArr]))
       logger.debug(params[:id])
       format.html { render :index }
     end

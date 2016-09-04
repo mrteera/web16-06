@@ -23,12 +23,11 @@
   <tbody>
     <% @quotations.each do |quotation| %>
       <tr>
-        <td><%= quotation.quote %></td>
+        <td><%= quotation.id %> <%= quotation.quote %></td>
         <td><%= quotation.author_name %></td>
         <td><%= quotation.category.name %></td>
         <td><%= link_to 'Show', quotation %></td>
-        <td><%= link_to 'Kill',kill_path(quotation) %>
-        <!--<td><%= link_to 'Kill',quotation, controller:"quotations", action:"kill" %></td>-->
+        <td><%= link_to 'Kill', controller:"quotations", action:"kill" , pass:quotation.id %></td>
         <td><%= link_to 'Edit', edit_quotation_path(quotation) %></td>
         <td><%= link_to 'Destroy', quotation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
