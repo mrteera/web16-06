@@ -228,4 +228,14 @@ investment=# select my_stocks.symbol, sum(n_shares), sum(n_shares) * price as to
 
 # -----------------------------------------------------------------------------
 # 13)
+investment=# create view stocks_i_like as select my_stocks.symbol, sum(n_shares), sum(n_shares) * price as total_value from my_stocks join stock_prices on my_stocks.symbol = stock_prices.symbol  group by my_stocks.symbol, price having price > (select avg(price) from stock_prices);
+CREATE VIEW
+investment=# select * from stocks_i_like;
+ symbol | sum | total_value 
+--------+-----+-------------
+ KBANK  | 200 |       71800
+ ADVANC | 200 |       85800
+ BANPU  | 200 |       74800
+(3 rows)
 
+# https://www.postgresql.org/docs/current/static/tutorial-views.html
