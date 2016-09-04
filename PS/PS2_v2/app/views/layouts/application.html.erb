@@ -12,5 +12,7 @@
 
     <%= yield %>
     <%= link_to 'Erase my personalization', controller:"quotations", action:"quotation_cookie_erase" %>
+    <%= link_to 'Export to JSON', controller:"quotations", action:"export" %>
+    <%= link_to 'Export to XML', controller:"quotations", action:"export" %>
   </body>
 </html>
