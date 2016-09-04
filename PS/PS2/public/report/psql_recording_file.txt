@@ -1,4 +1,5 @@
-mrteera=# create database investmenta
+# 7)
+mrteera=# create database investment;
 CREATE DATABASE
 
 mrteera=# \c investment
@@ -25,6 +26,8 @@ COPY 5
 # https://www.postgresql.org/docs/current/static/sql-copy.html
 # http://stackoverflow.com/a/6113351/1971997
 
+# -----------------------------------------------------------------------------
+# 8)
 investment=# select * from my_stocks;
  symbol | n_shares | date_acquired 
 --------+----------+---------------
@@ -34,3 +37,57 @@ investment=# select * from my_stocks;
  BTS    |      100 | 2016-08-31
  BANPU  |      100 | 2016-08-31
 (5 rows)
+
+investment=# create table stock_prices as select symbol, current_date as quote_date, 31.415 as price from my_stocks;
+SELECT 5
+
+investment=# \d stock_prices
+          Table "public.stock_prices"
+   Column   |         Type          | Modifiers 
+------------+-----------------------+-----------
+ symbol     | character varying(20) | 
+ quote_date | date                  | 
+ price      | numeric               | 
+
+investment=# select * from stock_prices;
+ symbol | quote_date | price  
+--------+------------+--------
+ ADVANC | 2016-09-04 | 31.415
+ KBANK  | 2016-09-04 | 31.415
+ SCB    | 2016-09-04 | 31.415
+ BTS    | 2016-09-04 | 31.415
+ BANPU  | 2016-09-04 | 31.415
+(5 rows)
+
+investment=# create table newly_acquired_stocks (
+investment(# symbol varchar(20) not null,
+investment(# n_shares integer not null,
+investment(# date_acquired date not null
+investment(# );
+CREATE TABLE
+
+investment=# \d newly_acquired_stocks
+       Table "public.newly_acquired_stocks"
+    Column     |         Type          | Modifiers 
+---------------+-----------------------+-----------
+ symbol        | character varying(20) | not null
+ n_shares      | integer               | not null
+ date_acquired | date                  | not null
+
+investment=# insert into newly_acquired_stocks select * from my_stocks where n_shares > 0 offset 2;
+INSERT 0 3
+
+investment=# select * from newly_acquired_stocks;
+ symbol | n_shares | date_acquired 
+--------+----------+---------------
+ SCB    |      100 | 2016-08-31
+ BTS    |      100 | 2016-08-31
+ BANPU  |      100 | 2016-08-31
+(3 rows)
+
+# https://www.postgresql.org/docs/current/static/sql-createtableas.html
+# https://www.postgresql.org/docs/current/static/functions-datetime.html
+# https://www.postgresql.org/docs/9.5/static/functions-comparison.html
+# https://www.postgresql.org/docs/current/static/sql-insert.html
+
+# -----------------------------------------------------------------------------
