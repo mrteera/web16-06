@@ -90,6 +90,17 @@ class QuotationsController < ApplicationController
     end
   end
 
+  def export
+    @quotations=Quotation.all.as_json
+    pp @quotations
+    respond_to do |format|
+      #format.html
+      format.json{render json: @quotations}
+      format.xml{render xml: @quotations}
+
+    end
+  end
+
   # DELETE /quotations/1
   # DELETE /quotations/1.json
   def destroy
