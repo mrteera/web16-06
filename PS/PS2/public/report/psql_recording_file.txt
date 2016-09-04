@@ -163,3 +163,69 @@ investment=# select portfolio_value();                                          
           161100
 (1 row)
 
+# -----------------------------------------------------------------------------
+# 10)
+investment=# select * from stock_prices;
+ symbol | quote_date | price 
+--------+------------+-------
+ ADVANC | 2016-09-04 |   429
+ KBANK  | 2016-09-04 |   359
+ SCB    | 2016-09-04 |   216
+ BTS    | 2016-09-04 |   233
+ BANPU  | 2016-09-04 |   374
+(5 rows)
+
+investment=# select avg(price) from stock_prices;
+         avg          
+----------------------
+ 322.2000000000000000
+(1 row)
+
+investment=# insert into my_stocks (symbol, n_shares, date_acquired) select my_stocks.symbol, n_shares, current_date from stock_prices join my_stocks on my_stocks.symbol = stock_prices.symbol where price > (select avg(price) from stock_prices);
+INSERT 0 3
+
+investment=# select * from my_stocks;
+ symbol | n_shares | date_acquired 
+--------+----------+---------------
+ ADVANC |      100 | 2016-08-31
+ KBANK  |      100 | 2016-08-31
+ SCB    |      100 | 2016-08-31
+ BTS    |      100 | 2016-08-31
+ BANPU  |      100 | 2016-08-31
+ AAPL   |       10 | 2016-09-04
+ ADVANC |      100 | 2016-09-04
+ KBANK  |      100 | 2016-09-04
+ BANPU  |      100 | 2016-09-04
+
+investment=# select symbol, sum(n_shares) from my_stocks group by symbol;
+ symbol | sum 
+--------+-----
+ AAPL   |  10
+ KBANK  | 200
+ BANPU  | 200
+ SCB    | 100
+ BTS    | 100
+ ADVANC | 200
+(6 rows)
+
+investment=# select my_stocks.symbol, sum(n_shares) * price as total_value from my_stocks join stock_prices on my_stocks.symbol = stock_prices.symbol  group by my_stocks.symbol, price;
+ symbol | total_value 
+--------+-------------
+ SCB    |       21600
+ KBANK  |       71800
+ BANPU  |       74800
+ BTS    |       23300
+ ADVANC |       85800
+(5 rows)
+
+investment=# select my_stocks.symbol, sum(n_shares), sum(n_shares) * price as total_value from my_stocks join stock_prices on my_stocks.symbol = stock_prices.symbol  group by my_stocks.symbol, price having price > (select avg(price) from stock_prices);
+ symbol | sum | total_value 
+--------+-----+-------------
+ KBANK  | 200 |       71800
+ ADVANC | 200 |       85800
+ BANPU  | 200 |       74800
+(3 rows)
+
+# -----------------------------------------------------------------------------
+# 13)
+
