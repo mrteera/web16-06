@@ -9,5 +9,6 @@ Rails.application.routes.draw do
   get 'erase', to:'quotations#quotation_cookie_erase'
   get 'export-quotations.json', to:'quotations#export'
   get 'export-quotations.xml', to:'quotations#export'
+  get 'import-xml', to:'quotations#import_xml'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

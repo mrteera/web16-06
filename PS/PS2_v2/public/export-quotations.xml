@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects type="array">
+  <object>
+    <id type="integer">3</id>
+    <quote>Men are like a fine wine. They all start out like grapes, and it’s our job to stomp on them and
+keep them in the dark where they will mature into something you’d want to have dinner with.</quote>
+    <author-name>Unknown Heroine</author-name>
+    <category-id type="integer">2</category-id>
+    <created-at type="dateTime">2016-09-03T12:09:17Z</created-at>
+    <updated-at type="dateTime">2016-09-03T12:09:17Z</updated-at>
+  </object>
+  <object>
+    <id type="integer">2</id>
+    <quote>If a man speaks in the forest and there is no woman there to hear him, is he still wrong?</quote>
+    <author-name>Unknown Heroine</author-name>
+    <category-id type="integer">2</category-id>
+    <created-at type="dateTime">2016-09-03T12:08:30Z</created-at>
+    <updated-at type="dateTime">2016-09-03T12:09:25Z</updated-at>
+  </object>
+</objects>

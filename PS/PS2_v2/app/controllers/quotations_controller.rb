@@ -96,9 +96,39 @@ class QuotationsController < ApplicationController
     respond_to do |format|
       #format.html
       format.json{render json: @quotations}
-      format.xml{render xml: @quotations}
+      format.xml{render xml: @quotations, content_type: Mime::XML}
 
     end
+  end
+
+  def import_xml
+    # url=URI.parse('http://localhost:3000/export-quotations.xml')
+    # req=Net::HTTP::Get.new(url.to_s)
+    # req.path_parameters[:foramt]=
+    # res=Net::HTTP.start(url.host,url.port){|http|
+    #   puts req
+    #   http.request(req)
+    # }
+    # puts 'http stufffffffffff'
+    # puts res.header
+
+    # req = Net::HTTP.new('localhost:3000')
+    # response = req.post('/export-quotations.xml')
+    #
+    #puts response.body
+
+    # doc = open('http://localhost:3000/export-quotations.xml')
+    # puts doc
+    clnt = HTTPClient.new
+    https_url = 'http://localhost:8000/export-quotations.xml'
+    puts clnt.get_content(https_url)
+
+
+    respond_to do |format|
+      @quotations=Quotation.all
+      format.html { render :index }
+    end
+
   end
 
   # DELETE /quotations/1
