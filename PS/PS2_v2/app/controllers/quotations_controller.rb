@@ -66,7 +66,17 @@ class QuotationsController < ApplicationController
       logger.debug(@quotations)
       format.html { render :index }
     end
+  end
 
+  def kill
+    puts 'hello---------------------------------------------------'
+    puts @quotation.class
+    respond_to do |format|
+      cookies[:killedQuote]=@quotation.to_s#1#params[:id]
+      @quotations=Quotation.where.not(id:1)
+      logger.debug(params[:id])
+      format.html { render :index }
+    end
   end
 
   # DELETE /quotations/1
