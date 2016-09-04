@@ -62,7 +62,7 @@ class QuotationsController < ApplicationController
     respond_to do |format|
       logger.debug(">>>")
       logger.debug(params[:q])
-      @quotations=Quotation.where('quote like ? OR author_name like ?','%'+params[:q]+'%','%'+params[:q]+'%') #,find_by_quote(params[:q])
+      @quotations=Quotation.where('lower(quote) like ? OR lower(author_name) like ?','%'+params[:q].downcase+'%','%'+params[:q].downcase+'%') #,find_by_quote(params[:q])
       logger.debug(@quotations)
       format.html { render :index }
     end
