@@ -131,6 +131,8 @@ investment=# select my_stocks.symbol, n_shares as number_of_shares, price as pri
  AAPL   |               10 |                 |              
 (6 rows)
 
+# https://www.postgresql.org/docs/current/static/tutorial-join.html
+
 # -----------------------------------------------------------------------------
 # 11)
 
@@ -162,6 +164,9 @@ investment=# select portfolio_value();                                          
 -----------------
           161100
 (1 row)
+
+# https://cis.ait.asia/course_offerings/440/lecture_notes/1158
+# https://www.postgresql.org/docs/current/static/plpgsql.html
 
 # -----------------------------------------------------------------------------
 # 10)
@@ -225,6 +230,8 @@ investment=# select my_stocks.symbol, sum(n_shares), sum(n_shares) * price as to
  ADVANC | 200 |       85800
  BANPU  | 200 |       74800
 (3 rows)
+
+# https://www.postgresql.org/docs/current/static/sql-insert.html
 
 # -----------------------------------------------------------------------------
 # 13)
