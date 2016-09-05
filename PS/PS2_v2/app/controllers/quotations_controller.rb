@@ -35,7 +35,6 @@ class QuotationsController < ApplicationController
     end
 
     @quotation = Quotation.new(quotation_params)
-
     respond_to do |format|
       if @quotation.save
         format.html { redirect_to @quotation, notice: 'Quotation was successfully created.' }
@@ -63,7 +62,10 @@ class QuotationsController < ApplicationController
 
   def search
     respond_to do |format|
-      @quotations=Quotation.where('lower(quote) like ? OR lower(author_name) like ?','%'+params[:q].downcase+'%','%'+params[:q].downcase+'%') #,find_by_quote(params[:q])
+      if cookies[:killedQuoteArr] == nil
+        cookies[:killedQuoteArr]=JSON.generate([])
+      end
+      @quotations=Quotation.where('lower(quote) like ? OR lower(author_name) like ?','%'+params[:q].downcase+'%','%'+params[:q].downcase+'%').where.not(id:JSON.parse(cookies[:killedQuoteArr])) #,fid:ind_by_quote(params[:q])
       format.html { render :index }
     end
   end
@@ -95,34 +97,37 @@ class QuotationsController < ApplicationController
     pp @quotations
     respond_to do |format|
       #format.html
-      format.json{render json: @quotations}
       format.xml{render xml: @quotations, content_type: Mime::XML}
-
-    end
+      format.json{render json: @quotations}
+      end
   end
 
   def import_xml
-    # url=URI.parse('http://localhost:3000/export-quotations.xml')
-    # req=Net::HTTP::Get.new(url.to_s)
-    # req.path_parameters[:foramt]=
-    # res=Net::HTTP.start(url.host,url.port){|http|
-    #   puts req
-    #   http.request(req)
-    # }
-    # puts 'http stufffffffffff'
-    # puts res.header
+    # http = Net::HTTP.new('localhost', 3000)
+    # req = Net::HTTP::Get.new('/export-quotations.json')
+    # req.initialize_http_header({"Accept" => "application/json"})
+    # response = http.request(req)
+    # puts response.body
 
-    # req = Net::HTTP.new('localhost:3000')
-    # response = req.post('/export-quotations.xml')
-    #
+    http = Net::HTTP.new('localhost', 3000)
+    req = Net::HTTP::Get.new('/export-quotations.xml')
+    req.initialize_http_header({"Accept" => "application/xhtml+xml,application/xml;q=0.9"})
+    response = http.request(req)
     #puts response.body
 
-    # doc = open('http://localhost:3000/export-quotations.xml')
-    # puts doc
-    clnt = HTTPClient.new
-    https_url = 'http://localhost:8000/export-quotations.xml'
-    puts clnt.get_content(https_url)
+    #https_url = 'http://localhost:8000/export-quotations.xml'
+    #puts clnt.get_content(https_url)
+    @doc = Nokogiri::HTML(response.body)
+    obj= @doc.xpath("//objects//object")
 
+    obj.each do |o|
+      Quotation.create(
+          :quote=>o.css('quote').text,
+          :author_name=>o.css('author-name').text,
+          :category_id=>o.css('category-id').text
+      )
+
+    end
 
     respond_to do |format|
       @quotations=Quotation.all

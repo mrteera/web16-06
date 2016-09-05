@@ -10,9 +10,13 @@
 
   <body>
     <%= yield %>
-    <%= link_to 'Erase my personalization', controller:"quotations", action:"quotation_cookie_erase" %>
+
     <%= link_to 'Export to JSON', 'export-quotations.json'%>
     <%= link_to 'Export to XML', 'export-quotations.xml' %>
-  <%= link_to 'Import your XML', 'import-xml' %>
+    <%= link_to 'Import your XML', 'import-xml' %>
+    <% if cookies[:killedQuoteArr] !=nil %>
+      <%= link_to 'Erase my personalization', controller:"quotations", action:"quotation_cookie_erase" %>
+  <% end %>
+
   </body>
 </html>
