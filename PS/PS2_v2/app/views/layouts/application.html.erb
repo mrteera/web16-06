@@ -13,10 +13,18 @@
 
     <%= link_to 'Export to JSON', 'export-quotations.json'%>
     <%= link_to 'Export to XML', 'export-quotations.xml' %>
-    <%= link_to 'Import your XML', 'import-xml' %>
     <% if cookies[:killedQuoteArr] !=nil %>
       <%= link_to 'Erase my personalization', controller:"quotations", action:"quotation_cookie_erase" %>
-  <% end %>
+    <% end %>
 
+    <div>
+      <br>
+      <br>
+  <%= form_tag import_xml_path, method: :get do %>
+      <%= label_tag(:xmlurl, "Enter url of the XML file:") %>
+      <%= text_field_tag(:xmlurl) %>
+      <%= submit_tag("Import") %>
+  <% end %>
+    </div>
   </body>
 </html>

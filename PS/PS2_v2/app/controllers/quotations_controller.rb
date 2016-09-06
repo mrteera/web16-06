@@ -122,7 +122,8 @@ class QuotationsController < ApplicationController
     # end
 
     doc = Nokogiri::XML(
-        open('http://web7.cs.ait.ac.th/ps2/quotations/export.xml'),
+       # open('http://web7.cs.ait.ac.th/ps2/quotations/export.xml'),
+        open(params[:xmlurl]),
         # open('http://quotes.rest/qod.xml'),
         nil,
         'UTF-8'

@@ -10,26 +10,30 @@
     <%= submit_tag("Search") %>
 <% end %>
 
-<table>
+<table style="margin-top: 30px">
   <thead>
-    <tr>
+    <tr style="background: #BBBBBB; padding:5px;color:#333;">
+      <th></th>
       <th>Quote</th>
       <th>Author name</th>
       <th>Category</th>
-      <th colspan="4"></th>
+      <th colspan="2"></th>
     </tr>
   </thead>
 
   <tbody>
-    <% @quotations.each do |quotation| %>
+    <% i=0
+       @quotations.each do |quotation|
+    %>
       <tr>
-        <td><%= quotation.id %> <%= quotation.quote %></td>
+        <td><%= i+=1 %></td>
+        <td><%= quotation.quote %></td>
         <td><%= quotation.author_name %></td>
         <td><%= quotation.category.name %></td>
-        <td><%= link_to 'Show', quotation %></td>
+        <!--<td><%= link_to 'Show', quotation %></td>-->
         <td><%= link_to 'Kill', controller:"quotations", action:"kill" , pass:quotation.id %></td>
         <td><%= link_to 'Edit', edit_quotation_path(quotation) %></td>
-        <td><%= link_to 'Destroy', quotation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <!--<td><%= link_to 'Destroy', quotation, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
       </tr>
     <% end %>
   </tbody>
