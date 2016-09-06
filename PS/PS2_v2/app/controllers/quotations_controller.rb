@@ -31,7 +31,7 @@ class QuotationsController < ApplicationController
 
     if(params[:quotation][:category_id] == '-1')
       @category = Category.create(name:params[:category_name])
-      params[:quotation][:categzxory_id] = @category.id
+      params[:quotation][:category_id] = @category.id
     end
 
     @quotation = Quotation.new(quotation_params)
@@ -170,30 +170,32 @@ class QuotationsController < ApplicationController
     }
 
     quotation_output.each do |row|
+      #puts row['quote']
       #row.each do |key,value|
       category= row['category']
 
-      @check_category_exists = Category.where('lower(name) like ?','random').all #category.downcase)
+      @check_category_exists = Category.where('lower(name) like ?',category.to_s.downcase).all #category.downcase)
 
       if(@check_category_exists.to_a.count==0)
         category = Category.create(
             :name=>category
         )
        category_id=category.id
+        puts "00000000000000000000000000000000000"
       else
-        puts '-----------------'
-        temp = JSON.parse(@check_category_exists.to_json)
-        puts temp['name']
+        category_id= @check_category_exists.map(&:id)[0]
         #category_id=check_category_exists[0]
+        puts "111111111111111111111111111"
+        puts category_id
+
       end
-      # Quotation.create(
-      #     :quote=>row['quote'],
-      #     :author_name=>row['author-name'],
-      #     :category_id=>category_id
-      # )
 
+      Quotation.create(
+          :quote=>row['quote'],
+          :author_name=>row['author-name'],
+          :category_id=>category_id
+      )
 
-      #end
     end
     # pp quotation_output
 
