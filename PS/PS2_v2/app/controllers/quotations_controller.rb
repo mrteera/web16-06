@@ -4,11 +4,7 @@ class QuotationsController < ApplicationController
   # GET /quotations
   # GET /quotations.json
   def index
-    if cookies[:killedQuoteArr] == nil
-      cookies[:killedQuoteArr]=JSON.generate([])
-    end
-    @quotations = Quotation.where.not(id:JSON.parse(cookies[:killedQuoteArr]))
-    @quotation = Quotation.where.not(id:JSON.parse(cookies[:killedQuoteArr]))
+    getcontent
   end
 
   # GET /quotations/1
@@ -60,6 +56,13 @@ class QuotationsController < ApplicationController
     end
   end
 
+  def getcontent
+    if cookies[:killedQuoteArr] == nil
+      cookies[:killedQuoteArr]=JSON.generate([])
+    end
+    @quotations = Quotation.where.not(id:JSON.parse(cookies[:killedQuoteArr]))
+  end
+
   def search
     respond_to do |format|
       if cookies[:killedQuoteArr] == nil
@@ -71,26 +74,18 @@ class QuotationsController < ApplicationController
   end
 
   def kill
-    respond_to do |format|
       if cookies[:killedQuoteArr] == nil
         cookies[:killedQuoteArr]=JSON.generate([params[:pass]])
       else
         cookies[:killedQuoteArr]=JSON.generate(JSON.parse(cookies[:killedQuoteArr]) << params[:pass])
       end
-     @quotations=Quotation.where.not(id:JSON.parse(cookies[:killedQuoteArr]))
-      logger.debug(params[:id])
-      format.html { render :index }
-    end
+      getcontent
+      redirect_to action: 'index'
   end
 
   def quotation_cookie_erase
-    #respond_to do |format|
-      #@quotations=Quotation.all
-      #cookies[:killedQuoteArr]={:expires=> 1.hour.ago} same result as delete
-      cookies.delete :killedQuoteArr
-     #format.html { render :index }
+     cookies.delete :killedQuoteArr
      redirect_to action: 'index'
-    #end
   end
 
   def export
@@ -170,24 +165,15 @@ class QuotationsController < ApplicationController
     }
 
     quotation_output.each do |row|
-      #puts row['quote']
-      #row.each do |key,value|
       category= row['category']
-
       @check_category_exists = Category.where('lower(name) like ?',category.to_s.downcase).all #category.downcase)
-
       if(@check_category_exists.to_a.count==0)
         category = Category.create(
             :name=>category
         )
        category_id=category.id
-        puts "00000000000000000000000000000000000"
       else
         category_id= @check_category_exists.map(&:id)[0]
-        #category_id=check_category_exists[0]
-        puts "111111111111111111111111111"
-        puts category_id
-
       end
 
       Quotation.create(
@@ -195,11 +181,7 @@ class QuotationsController < ApplicationController
           :author_name=>row['author-name'],
           :category_id=>category_id
       )
-
     end
-    # pp quotation_output
-
-
     redirect_to action: 'index'
 
   end
