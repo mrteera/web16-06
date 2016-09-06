@@ -31,7 +31,7 @@ class QuotationsController < ApplicationController
 
     if(params[:quotation][:category_id] == '-1')
       @category = Category.create(name:params[:category_name])
-      params[:quotation][:category_id] = @category.id
+      params[:quotation][:categzxory_id] = @category.id
     end
 
     @quotation = Quotation.new(quotation_params)
@@ -84,12 +84,13 @@ class QuotationsController < ApplicationController
   end
 
   def quotation_cookie_erase
-    respond_to do |format|
-      @quotations=Quotation.all
+    #respond_to do |format|
+      #@quotations=Quotation.all
       #cookies[:killedQuoteArr]={:expires=> 1.hour.ago} same result as delete
       cookies.delete :killedQuoteArr
-      format.html { render :index }
-    end
+     #format.html { render :index }
+     redirect_to action: 'index'
+    #end
   end
 
   def export
@@ -108,31 +109,96 @@ class QuotationsController < ApplicationController
     # req.initialize_http_header({"Accept" => "application/json"})
     # response = http.request(req)
     # puts response.body
+    #
+    # http = Net::HTTP.new('localhost', 3000)
+    # req = Net::HTTP::Get.new('/export-quotations.xml')
+    # req.initialize_http_header({"Accept" => "application/xhtml+xml,application/xml;q=0.9"})
+    # response = http.request(req)
+    # @doc = Nokogiri::HTML(response.body)
+    # obj= @doc.xpath("//objects//object")
+    #
+    # obj.each do |o|
+    #   Quotation.create(
+    #       :quote=>o.css('quote').text,
+    #       :author_name=>o.css('author-name').text,
+    #       :category_id=>o.css('category-id').text
+    #   )
+    #
+    # end
 
-    http = Net::HTTP.new('localhost', 3000)
-    req = Net::HTTP::Get.new('/export-quotations.xml')
-    req.initialize_http_header({"Accept" => "application/xhtml+xml,application/xml;q=0.9"})
-    response = http.request(req)
-    #puts response.body
+    doc = Nokogiri::XML(
+        open('http://web7.cs.ait.ac.th/ps2/quotations/export.xml'),
+        # open('http://quotes.rest/qod.xml'),
+        nil,
+        'UTF-8'
+    )
 
-    #https_url = 'http://localhost:8000/export-quotations.xml'
-    #puts clnt.get_content(https_url)
-    @doc = Nokogiri::HTML(response.body)
-    obj= @doc.xpath("//objects//object")
+    number_of_columns= doc.root.first_element_child.elements.count
 
-    obj.each do |o|
-      Quotation.create(
-          :quote=>o.css('quote').text,
-          :author_name=>o.css('author-name').text,
-          :category_id=>o.css('category-id').text
-      )
+    all_nodes = []
+    doc.traverse {|node|
+      all_nodes << node
+    }
+    items = []
+    all_nodes.each_with_index { |node, index|
+      if node.text? and !node.text.strip.empty?
+        items << all_nodes[index + 1].name
+        items << node
+      end
+    }
 
+    items.each_with_index.collect { |each, index|
+      if index % 2 == 0
+        if each =~ /quo/i
+          each = 'quote'
+        elsif each =~ /auth/i
+          each = 'author-name'
+        elsif each =~ /cat/i
+          each = 'category'
+        elsif each =~ /name/i
+          each = each + rand(10).to_s
+        else
+          each = each
+        end
+        items[index] = each
+      end
+    }
+
+    quotation_output = []
+    items.each_slice(number_of_columns*2).to_a.each { |each|
+      quotation_output << Hash[*each]
+    }
+
+    quotation_output.each do |row|
+      #row.each do |key,value|
+      category= row['category']
+
+      @check_category_exists = Category.where('lower(name) like ?','random').all #category.downcase)
+
+      if(@check_category_exists.to_a.count==0)
+        category = Category.create(
+            :name=>category
+        )
+       category_id=category.id
+      else
+        puts '-----------------'
+        temp = JSON.parse(@check_category_exists.to_json)
+        puts temp['name']
+        #category_id=check_category_exists[0]
+      end
+      # Quotation.create(
+      #     :quote=>row['quote'],
+      #     :author_name=>row['author-name'],
+      #     :category_id=>category_id
+      # )
+
+
+      #end
     end
+    # pp quotation_output
 
-    respond_to do |format|
-      @quotations=Quotation.all
-      format.html { render :index }
-    end
+
+    redirect_to action: 'index'
 
   end
 
