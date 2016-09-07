@@ -1,8 +1,15 @@
 
 
 <p id="notice"><%= notice %></p>
-
 <h1>Quotations</h1>
+<%= form_tag import_xml_path, method: :get do %>
+    <%= label_tag(:xmlurl, "Enter url of the XML file:") %>
+    <%= text_field_tag(:xmlurl) %>
+    <%= submit_tag("Import") %>
+<% end %>
+<% if(flash[:err_url]) %>
+    <div class="errors"><%= flash[:err_url] %></div>
+<% end %>
 
 <%= form_tag search_path, method: :get do %>
     <%= label_tag(:q, "Search for:") %>
@@ -10,21 +17,22 @@
     <%= submit_tag("Search") %>
 <% end %>
 
-<table style="margin-top: 30px">
+<table id="quotation_table">
   <thead>
-    <tr style="background: #BBBBBB; padding:5px;color:#333;">
+    <tr id="quotation_table_th">
       <th></th>
       <th>Quote</th>
       <th>Author name</th>
       <th>Category</th>
-      <th colspan="2"></th>
+
     </tr>
   </thead>
 
   <tbody>
-    <% i=0
-       @quotations.each do |quotation|
-    %>
+  <% i=0
+     @quotations.each do |quotation|
+  %>
+      <th colspan="2"></th>
       <tr>
         <td><%= i+=1 %></td>
         <td><%= quotation.quote %></td>
@@ -32,7 +40,7 @@
         <td><%= quotation.category.name %></td>
         <!--<td><%= link_to 'Show', quotation %></td>-->
         <td><%= link_to 'Kill', controller:"quotations", action:"kill" , pass:quotation.id %></td>
-        <td><%= link_to 'Edit', edit_quotation_path(quotation) %></td>
+        <!--<td><%= link_to 'Edit', edit_quotation_path(quotation) %></td>-->
         <!--<td><%= link_to 'Destroy', quotation, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
       </tr>
     <% end %>

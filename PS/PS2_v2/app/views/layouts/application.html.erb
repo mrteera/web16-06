@@ -6,9 +6,19 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <style>
+      .errors{color:red; font-size: 20px; padding-top: 15px}
+      form input, form button{border-radius: 0; border: 1px solid #ccc; padding: 4px}
+      #quotation_table
+      {
+        background: #f0f0f0; margin-top: 20px;
+      }
+      #quotation_table_th{background: #BBBBBB; padding:5px;color:#333;}
+    </style>
   </head>
 
   <body>
+
     <%= yield %>
 
     <%= link_to 'Export to JSON', 'export-quotations.json'%>
@@ -16,15 +26,10 @@
     <% if cookies[:killedQuoteArr] !=nil %>
       <%= link_to 'Erase my personalization', controller:"quotations", action:"quotation_cookie_erase" %>
     <% end %>
-
     <div>
       <br>
       <br>
-  <%= form_tag import_xml_path, method: :get do %>
-      <%= label_tag(:xmlurl, "Enter url of the XML file:") %>
-      <%= text_field_tag(:xmlurl) %>
-      <%= submit_tag("Import") %>
-  <% end %>
+
     </div>
   </body>
 </html>

@@ -121,14 +121,29 @@ class QuotationsController < ApplicationController
     #
     # end
 
-    doc = Nokogiri::XML(
-       # open('http://web7.cs.ait.ac.th/ps2/quotations/export.xml'),
-        open(params[:xmlurl]),
-        # open('http://quotes.rest/qod.xml'),
-        nil,
-        'UTF-8'
-    )
+    begin
+      url =params[:xmlurl]
+      get_content_type=open(url)
+      if get_content_type.content_type!="application/xml"
+        flash[:err_url]="This file format is not supported. Please upload an XML!"
+      else
+        doc = Nokogiri::XML(
+            # open('http://web7.cs.ait.ac.th/ps2/quotations/export.xml'),
+            open(params[:xmlurl]),
+            nil,
+            'UTF-8'
+        )
+        parse_xml(doc)
+      end
+      rescue =>e
+        flash[:err_url]="Please use a valid URL!!"
+      else
+    end
+    redirect_to action: 'index'
+  end
 
+
+  def parse_xml(doc)
     number_of_columns= doc.root.first_element_child.elements.count
 
     all_nodes = []
@@ -172,7 +187,7 @@ class QuotationsController < ApplicationController
         category = Category.create(
             :name=>category
         )
-       category_id=category.id
+        category_id=category.id
       else
         category_id= @check_category_exists.map(&:id)[0]
       end
@@ -183,8 +198,6 @@ class QuotationsController < ApplicationController
           :category_id=>category_id
       )
     end
-    redirect_to action: 'index'
-
   end
 
   # DELETE /quotations/1
