@@ -124,9 +124,7 @@ class QuotationsController < ApplicationController
     begin
       url =params[:xmlurl]
       get_content_type=open(url)
-      if get_content_type.content_type!="application/xml"
-        flash[:err_url]="This file format is not supported. Please upload an XML!"
-      else
+      if get_content_type.content_type.downcase.include? "xml"
         doc = Nokogiri::XML(
             # open('http://web7.cs.ait.ac.th/ps2/quotations/export.xml'),
             open(params[:xmlurl]),
@@ -134,6 +132,8 @@ class QuotationsController < ApplicationController
             'UTF-8'
         )
         parse_xml(doc)
+        else
+          flash[:err_url]="This file format is not supported. Please upload an XML!"
       end
       rescue =>e
         flash[:err_url]="Please use a valid URL!!"
