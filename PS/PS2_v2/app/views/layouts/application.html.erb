@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>PS2V2</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <style>
+      .errors{color:red; font-size: 20px; padding: 15px 0}
+      form input, form button{border-radius: 0; border: 1px solid #ccc; padding: 4px}
+      #quotation_table
+      {
+        background: #f0f0f0; margin-top: 20px;
+      }
+      #quotation_table_th{background: #BBBBBB; padding:5px;color:#333;}
+    </style>
+  </head>
+
+  <body>
+
+    <%= yield %>
+
+    <%= link_to 'Export to JSON', 'export-quotations.json'%>
+    <%= link_to 'Export to XML', 'export-quotations.xml' %>
+    <% if cookies[:killedQuoteArr] !=nil %>
+      <%= link_to 'Erase my personalization', controller:"quotations", action:"quotation_cookie_erase" %>
+    <% end %>
+    <div>
+      <br>
+      <br>
+
+    </div>
+  </body>
+</html>

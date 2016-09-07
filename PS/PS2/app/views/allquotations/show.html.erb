@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Quote:</strong>
+  <%= @allquotation.quote %>
+</p>
+
+<p>
+  <strong>Author:</strong>
+  <%= @allquotation.author %>
+</p>
+
+<p>
+  <strong>Categories:</strong>
+  <%= @allquotation.categories %>
+</p>
+
+<%= link_to 'Edit', edit_allquotation_path(@allquotation) %> |
+<%= link_to 'Back', allquotations_path %>
