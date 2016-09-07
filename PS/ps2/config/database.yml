@@ -81,5 +81,5 @@ test:
 production:
   <<: *default
   database: PS2_v2_production
-  username: PS2_v2
-  password: <%= ENV['PS2_V2_DATABASE_PASSWORD'] %>
+  username: web6
+  password: <%= ENV['YOUTUBE_DATABASE_PASSWORD'] %>
