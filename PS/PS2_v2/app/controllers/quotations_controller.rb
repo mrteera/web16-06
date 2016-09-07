@@ -145,7 +145,6 @@ class QuotationsController < ApplicationController
 
   def parse_xml(doc)
     number_of_columns= doc.root.first_element_child.elements.count
-
     all_nodes = []
     doc.traverse {|node|
       all_nodes << node
