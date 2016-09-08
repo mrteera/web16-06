@@ -1,4 +1,7 @@
 language: ruby
+branches:
+  only:
+    - ps1
 rvm:
   - 2.3.1
 sudo: false
@@ -18,7 +21,7 @@ before_install:
   - "phantomjs --version"
 before_script:
   - psql -c 'create database travis_ci_test;' -U postgres
-  - cd PS/youtube
+  - if [[ "$TRAVIS_BRANCH" == "ps1" ]]; then cd PS/ps1; fi
   - bundle install --jobs=3 --retry=3
   - rails db:migrate
   - rails server &
