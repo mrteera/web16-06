@@ -2,10 +2,6 @@ Given(/^Tammy visits home page$/) do
   visit '/'
 end
 
-Then(/^Tammy clicks PS1 link$/) do
-  click_link 'Problem Set 1'
-end
-
 Then(/^Tammy should see the title of the list$/) do
   expect(page).to have_content('Top Ten Trending Videos On YouTube')
 end
