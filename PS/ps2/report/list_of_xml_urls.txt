@@ -1,0 +1,25 @@
+# Here are the XML URLs that we can import
+
+http://web1.cs.ait.ac.th/quotaions.xml
+http://web2.cs.ait.ac.th/quotations/export_to_xml
+http://web4.cs.ait.ac.th/ps2_quote/quotations.xml
+http://web6.cs.ait.ac.th/ps2/export-quotations.xml
+http://web7.cs.ait.ac.th/ps2/quotations/export.xml
+http://web8.cs.ait.ac.th/basics/2/quotations/xml
+http://web11.cs.ait.ac.th/basics/users_xml
+http://web13.cs.ait.ac.th/ps2/quotations/export.xml
+http://web14.cs.ait.ac.th/pages/qto_xml
+http://web17.cs.ait.ac.th/basics/quotations.xml
+
+-------------------------------------------------------------------------------
+# Cannot import some quotations
+http://web9.cs.ait.ac.th/basics/quotations.xml
+
+# Cannot import
+http://web3.cs.ait.ac.th/welcome/writexml
+http://web5.cs.ait.ac.th/ps_two/quotations/export?type=xml
+http://web10.cs.ait.ac.th/quotations/export.xml
+
+# Cannt find URL
+http://web12.cs.ait.ac.th/ << Moved to web17
+http://web15.cs.ait.ac.th/ << No one
