@@ -1,0 +1,155 @@
+Question: Explain how ActiveRecord uses an SQL sequence object for the ID field.
+
+Answer: A column of type integer named `id` (primary key) is created by ActiveRecord.
+Thus this field is the surrogate key. The `id` number will incremented automatically by constraints (modifiers) defined from Rails
+Below we expalined how ActiveRecord uses an SQL sequence object for the ID field.
+We will focus on `quotations` table as an example.
+
+-------------------------------------------------------------------------------
+First, we create ActiveRecord in Rails through `rails generate` command:
+# rails generate scaffold quotation quote:text author_name:string category:references
+Then we run `rails db:create db:migrate` to apply all migration files to PostgreSQL database.
+It generates codes in `db/schema.rb`:
+
+create_table "quotations", force: :cascade do |t|
+  t.text     "quote"
+  t.string   "author_name"
+  t.integer  "category_id"
+  t.datetime "created_at",  null: false
+  t.datetime "updated_at",  null: false
+  t.index ["category_id"], name: "index_quotations_on_category_id", using: :btree
+end
+
+-------------------------------------------------------------------------------
+Here's the tables that was created:
+
+# \d quotations
+                                      Table "public.quotations"
+   Column    |            Type             |                        Modifiers                        
+-------------+-----------------------------+---------------------------------------------------------
+ id          | integer                     | not null default nextval('quotations_id_seq'::regclass)
+ quote       | text                        | 
+ author_name | character varying           | 
+ category_id | integer                     | 
+ created_at  | timestamp without time zone | not null
+ updated_at  | timestamp without time zone | not null
+Indexes:
+    "quotations_pkey" PRIMARY KEY, btree (id)
+    "index_quotations_on_category_id" btree (category_id)
+Foreign-key constraints:
+    "fk_rails_25bb62af3b" FOREIGN KEY (category_id) REFERENCES categories(id)
+
+# select * from quotations_id_seq;
+   sequence_name   | last_value | start_value | increment_by |      max_value      | min_value | cache_value | log_cnt | is_cycled | is_called 
+-------------------+------------+-------------+--------------+---------------------+-----------+-------------+---------+-----------+-----------
+ quotations_id_seq |          1 |           1 |            1 | 9223372036854775807 |         1 |           1 |       0 | f         | f
+(1 row)
+
+From `rails generate` command, there is no `id` primary key specified.
+But Rails automatically did that for us. Also it created sequence objects table `quotations_id_seq`
+The sequence objects will be called for some SQl operation with `quotations` table.
+For example when insert a new row, column `id` will call nextval function to increment `id`
+
+Sequence objects are commonly used to generate unique identifiers for rows of a table.
+https://www.postgresql.org/docs/current/static/functions-sequence.html
+-------------------------------------------------------------------------------
+
+The code below is what we think it would trigger after we execute `rails db:migtate`.
+Then it calls create_table, and the primary key was automatically added into the database schema.
+
+# https://github.com/rails/rails/blob/master/activerecord/lib/active_record/connection_adapters/abstract/schema_statements.rb#L258
+def create_table(table_name, comment: nil, **options)
+  td = create_table_definition table_name, options[:temporary], options[:options], options[:as], comment: comment
+
+  if options[:id] != false && !options[:as]
+    pk = options.fetch(:primary_key) do
+      Base.get_primary_key table_name.to_s.singularize
+    end
+
+    if pk.is_a?(Array)
+      td.primary_keys pk
+    else
+      td.primary_key pk, options.fetch(:id, :primary_key), options
+    end
+  end
+
+# `create_table` method call primary_key
+
+# Defines the primary key field.
+https://github.com/rails/rails/blob/master/activerecord/lib/active_record/connection_adapters/postgresql/schema_definitions.rb#L33
+def primary_key(name, type = :primary_key, **options)
+  options[:default] = options.fetch(:default, "uuid_generate_v4()") if type == :uuid
+  super
+end
+
+https://github.com/rails/rails/blob/master/activerecord/lib/active_record/connection_adapters/abstract/schema_definitions.rb#L155
+# Appends a primary key definition to the table definition.
+# Can be called multiple times, but this is probably not a good idea.
+def primary_key(name, type = :primary_key, **options)
+  column(name, type, options.merge(primary_key: true))
+end
+
+# options.fetch retrieve primary_key details
+if options[:id] != false && !options[:as]
+  pk = options.fetch(:primary_key) do
+    Base.get_primary_key table_name.to_s.singularize
+  end
+
+# The default definition of primary key have defined here:
+https://github.com/rails/rails/blob/master/activerecord/lib/active_record/connection_adapters/postgresql_adapter.rb#L73
+NATIVE_DATABASE_TYPES = {
+  primary_key: "serial primary key",
+  string:      { name: "character varying" },
+  text:        { name: "text" },
+  integer:     { name: "integer" },
+
+-----------------------------------------------------------------------------
+Here are SQL sequence objects when `Quotation.create` was triggered.
+
+(0.2ms)  BEGIN
+  Category Load (0.4ms)  SELECT  "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+  SQL (5.6ms)  INSERT INTO "quotations" ("quote", "author_name", "category_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["quote", "Anything that can go wrong will go wrong"], ["author_name", "Murphy's Law"], ["category_id", 1], ["created_at", 2016-09-08 15:53:54 UTC], ["updated_at", 2016-09-08 15:53:54 UTC]]
+   (3.0ms)  COMMIT
+
+# select * from quotations_id_seq;
+   sequence_name   | last_value | start_value | increment_by |      max_value      | min_value | cache_value | log_cnt | is_cycled | is_called 
+-------------------+------------+-------------+--------------+---------------------+-----------+-------------+---------+-----------+-----------
+ quotations_id_seq |          1 |           1 |            1 | 9223372036854775807 |         1 |           1 |      32 | f         | t
+(1 row)
+
+
+# log_cnt has increased from 0 to 32
+# last_value has not changed.
+# log_cnt is used for "preallocation" of sequence values.
+# https://devon.so/2015/02/06/as-tale-of-sequences-and-postgresql-replication-9/
+
+(0.2ms)  BEGIN
+  Category Load (0.3ms)  SELECT  "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2  [["id", 2], ["LIMIT", 1]]
+  SQL (0.5ms)  INSERT INTO "quotations" ("quote", "author_name", "category_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["quote", "You can be serious without a suit"], ["author_name", "Google"], ["category_id", 2], ["created_at", 2016-09-08 15:59:12 UTC], ["updated_at", 2016-09-08 15:59:12 UTC]]
+   (2.1ms)  COMMIT
+
+# select * from quotations_id_seq;
+   sequence_name   | last_value | start_value | increment_by |      max_value      | min_value | cache_value | log_cnt | is_cycled | is_called 
+-------------------+------------+-------------+--------------+---------------------+-----------+-------------+---------+-----------+-----------
+ quotations_id_seq |          2 |           1 |            1 | 9223372036854775807 |         1 |           1 |      32 | f         | t
+(1 row)
+
+## The second quotation addition has increaed last_value from 1 to 2
+
+(0.2ms)  BEGIN
+  Category Load (0.4ms)  SELECT  "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+  SQL (0.5ms)  INSERT INTO "quotations" ("quote", "author_name", "category_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["quote", "Live as if you were to die tomorrow. Learn as if you were to live forever"], ["author_name", "Gandhi"], ["category_id", 1], ["created_at", 2016-09-08 16:01:25 UTC], ["updated_at", 2016-09-08 16:01:25 UTC]]
+   (2.1ms)  COMMIT
+
+# select * from quotations_id_seq;
+   sequence_name   | last_value | start_value | increment_by |      max_value      | min_value | cache_value | log_cnt | is_cycled | is_called 
+-------------------+------------+-------------+--------------+---------------------+-----------+-------------+---------+-----------+-----------
+ quotations_id_seq |          3 |           1 |            1 | 9223372036854775807 |         1 |           1 |      32 | f         | t
+(1 row)
+
+## The thrid quotation addition has increaed last_value from 2 to 3
+
+
+Some more references:
+- http://www.techscore.com/blog/2015/02/25/postgresql-and-rails-use-bigserial-id/
+- https://github.com/rails/rails/blob/master/activerecord/lib/active_record/connection_adapters/abstract/schema_creation.rb#L112
