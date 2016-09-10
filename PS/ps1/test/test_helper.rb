@@ -12,6 +12,12 @@ end
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
+require 'knapsack_pro'
+
+knapsack_pro_adapter = KnapsackPro::Adapters::MinitestAdapter.bind
+knapsack_pro_adapter.set_test_helper_path(__FILE__)
+
+WebMock.disable_net_connect!(:allow => 'api.knapsackpro.com') if defined?(WebMock)
 
 class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
