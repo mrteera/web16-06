@@ -18,7 +18,7 @@ before_script:
 script:
   - docker-compose -f docker-compose.yml run web rubocop -RDS --fail-fast
   - docker-compose -f docker-compose.yml run web haml-lint app/views/
-  - docker-compose -f docker-compose.yml run web rails test
-  - docker-compose -f docker-compose.yml run web rails cucumber
+  - docker-compose -f docker-compose.yml run web zeus test
+  - docker-compose -f docker-compose.yml run web zeus cucumber
 after_script:
   - docker-compose down
