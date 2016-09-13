@@ -19,6 +19,7 @@ WORKDIR $APPLICATION_ROOT
 ADD Gemfile /$APPLICATION_ROOT/Gemfile
 ADD Gemfile.lock /$APPLICATION_ROOT/Gemfile.lock
 RUN bundle install
+RUN rails db:create db:migrate db:seed
 COPY ./compose/rails/entrypoint.sh /entrypoint.sh
 COPY ./compose/rails/start-dev.sh /start-dev.sh
 ADD . /$APPLICATION_ROOT

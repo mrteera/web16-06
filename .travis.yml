@@ -14,8 +14,11 @@ env:
 before_script:
   - if [[ "$TRAVIS_BRANCH" == "ps1" ]]; then cd PS/ps1; fi
   - docker-compose -f docker-compose.yml up --build -d
-  - docker-compose -f docker-compose.yml run web rails db:create db:migrate
+  - docker-compose -f docker-compose.yml run -d zeus start
 script:
-  - docker-compose -f docker-compose.yml run bash tests.sh
+  - docker-compose -f docker-compose.yml run rubocop -RDS --fail-fast
+  - docker-compose -f docker-compose.yml run haml-lint app/views/
+  - docker-compose -f docker-compose.yml run rails test
+  - docker-compose -f docker-compose.yml run rails cucumber
 after_script:
   - docker-compose down
