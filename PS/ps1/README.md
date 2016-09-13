@@ -22,6 +22,15 @@ docker-compose up
 ```
 
 **How to run the test suite**
+- Unit tests
+```
+# Open a new terminal
+docker-compose run web zeus start
+# Open another new terminal
+docker-compose run web bundle exec guard --force-polling
+# Open another new terminal
+docker-compose run web zeus cucumber
+```
 
 **Deployment instructions**
 

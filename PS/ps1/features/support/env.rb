@@ -62,5 +62,5 @@ Capybara.default_driver = :poltergeist
 
 Capybara.configure do |config|
   # config.run_server = false
-  config.app_host = 'http://localhost:3000'
+  config.app_host = 'http://172.17.0.1:3000'
 end

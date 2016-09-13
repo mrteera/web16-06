@@ -52,7 +52,8 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 group :test, :development do
   gem 'minitest'
-  gem  'minitest-rails'
+  gem 'minitest-reporters'
+  gem 'minitest-rails'
   gem 'webmock'
   gem 'cucumber-rails', require: false
   # database_cleaner is not required, but highly recommended
@@ -64,4 +65,8 @@ group :test, :development do
   gem 'simplecov', require: false
   gem 'poltergeist'
   gem 'knapsack_pro'
+  gem 'zeus-parallel_tests'
+  gem 'parallel_tests'
+  gem 'guard' # NOTE: this is necessary in newer versions
+  gem 'guard-minitest'
 end
