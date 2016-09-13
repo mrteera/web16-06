@@ -14,7 +14,7 @@ env:
 before_script:
   - if [[ "$TRAVIS_BRANCH" == "ps1" ]]; then cd PS/ps1; fi
   - docker-compose -f docker-compose.yml up --build -d
-  - docker-compose -f docker-compose.yml run web -d zeus start
+  - docker-compose -f docker-compose.yml run -d web zeus start
 script:
   - docker-compose -f docker-compose.yml run web rubocop -RDS --fail-fast
   - docker-compose -f docker-compose.yml run web haml-lint app/views/
