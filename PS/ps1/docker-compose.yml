@@ -4,8 +4,8 @@ services:
     image: postgres
   web:
     build:
-      context: .
-      dockerfile: ./compose/rails/Dockerfile
+      context: ../..
+      dockerfile: PS/ps1/compose/rails/Dockerfile
     entrypoint: /entrypoint.sh
     command: /start-dev.sh
     volumes:
