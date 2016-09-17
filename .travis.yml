@@ -15,9 +15,9 @@ before_script:
   - if [[ "$TRAVIS_BRANCH" == "ps1" ]]; then cd PS/ps1; fi
   - docker-compose -f docker-compose.yml up --build -d
 script:
-  - docker-compose -f docker-compose.yml exec web rubocop -RDS --fail-fast
-  - docker-compose -f docker-compose.yml exec web haml-lint app/views/
-  - docker-compose -f docker-compose.yml exec web rails test
-  - docker-compose -f docker-compose.yml exec web rails cucumber
+  - docker-compose -f docker-compose.yml run web rubocop -RDS --fail-fast
+  - docker-compose -f docker-compose.yml run web haml-lint app/views/
+  - docker-compose -f docker-compose.yml run web rails test
+  - docker-compose -f docker-compose.yml run web rails cucumber
 after_script:
   - docker-compose down
