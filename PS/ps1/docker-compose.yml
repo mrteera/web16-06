@@ -16,4 +16,5 @@ services:
       - db
     environment:
       - KNAPSACK_PRO_TEST_SUITE_TOKEN_MINITEST=$KNAPSACK_PRO_TEST_SUITE_TOKEN_MINITEST
-
+      - CI=$CI
+      - TRAVIS=$TRAVIS
