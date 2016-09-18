@@ -1,5 +1,5 @@
-Host $STAGING_USERNAME
-  Hostname $STAGING_HOSTNAME
-  User $STAGING_USERNAME
-  ProxyCommand ssh $PROXY_USERNAME@$PROXY_HOSTNAME nc %h %p
+Host web6
+  Hostname web6.cs.ait.ac.th
+  User web6
+  ProxyCommand ssh st118950@bazooka.cs.ait.ac.th nc %h %p
   ForwardAgent yes
