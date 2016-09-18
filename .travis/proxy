@@ -6,3 +6,9 @@ Host web6
   User web6
   ProxyCommand ssh st118950@bazooka.cs.ait.ac.th nc %h %p
   ForwardAgent yes
+
+Host web6.cs.ait.ac.th
+  Hostname web6.cs.ait.ac.th
+  User web6
+  ProxyCommand ssh st118950@bazooka.cs.ait.ac.th nc %h %p
+  ForwardAgent yes
