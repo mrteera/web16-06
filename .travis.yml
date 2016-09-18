@@ -11,9 +11,11 @@ env:
     - DOCKER_COMPOSE_VERSION: 2
     - REPO=mrteera/web16-06-$TRAVIS_BRANCH
     - COMMIT=${TRAVIS_COMMIT::8}
+    - if [[ "$TRAVIS_BRANCH" == "ps1" ]]; then REPO_DIR=PS/ps1; fi
 before_script:
-  - if [[ "$TRAVIS_BRANCH" == "ps1" ]]; then cd PS/ps1; fi
-  - docker-compose -t $REPO:$COMMIT -f docker-compose.yml up --build -d
+  - docker build -t $REPO:$COMMIT -f $REPO_DIR/compose/rails/Dockerfile .
+  - cd $REPO_DIR
+  - docker-compose -f docker-compose.yml up -d
 script:
   - docker-compose -f docker-compose.yml run web rubocop -RDS --fail-fast
   - docker-compose -f docker-compose.yml run web haml-lint app/views/
@@ -24,3 +26,4 @@ after_script:
 after_success:
   - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
   - docker push $REPO
+  - bash deploy.sh
