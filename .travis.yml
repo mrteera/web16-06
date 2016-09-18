@@ -13,7 +13,7 @@ env:
     - COMMIT=${TRAVIS_COMMIT::8}
 before_script:
   - if [[ "$TRAVIS_BRANCH" == "ps1" ]]; then cd PS/ps1; fi
-  - docker-compose -f docker-compose.yml up --build -d
+  - docker-compose -t $REPO:$COMMIT -f docker-compose.yml up --build -d
 script:
   - docker-compose -f docker-compose.yml run web rubocop -RDS --fail-fast
   - docker-compose -f docker-compose.yml run web haml-lint app/views/
@@ -24,6 +24,3 @@ after_script:
 after_success:
   - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
   - docker push $REPO
-  - cp ../../proxy ~/.ssh/config
-  - sed -i "s#image: {}#image: $REPO:$COMMIT#g" docker-compose.production.yml
-  - scp docker-compose.production.yml $STAGING_USERNAME:$STAGING_DEPLOY_PATH
