@@ -9,7 +9,7 @@ env:
   matrix:
   - global:
     - DOCKER_COMPOSE_VERSION: 2
-    - REPO=mrteera/web16-06
+    - REPO=mrteera/web16-06-$TRAVIS_BRANCH
     - COMMIT=${TRAVIS_COMMIT::8}
 before_script:
   - if [[ "$TRAVIS_BRANCH" == "ps1" ]]; then cd PS/ps1; fi
@@ -21,3 +21,9 @@ script:
   - docker-compose -f docker-compose.yml run web rails cucumber
 after_script:
   - docker-compose down
+after_success:
+  - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
+  - docker push $REPO
+  - cp ../../proxy ~/.ssh/config
+  - sed -i "s#image: {}#image: $REPO:$COMMIT#g" docker-compose.production.yml
+  - scp docker-compose.production.yml $STAGING_USERNAME:$STAGING_DEPLOY_PATH

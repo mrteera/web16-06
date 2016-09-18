@@ -1,0 +1,11 @@
+version: '2'
+services:
+  db:
+    image: postgres
+    volumes:
+      - /var/lib/docker/postgres-data:/var/lib/postgresql/data
+  web:
+    image: {}
+    command: /start-production.sh
+    depends_on:
+      - db
