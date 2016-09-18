@@ -83,8 +83,9 @@ test: &test
 production:
   <<: *default
   database: youtube_production
-  username: web6
-  password: <%= ENV['YOUTUBE_DATABASE_PASSWORD'] %>
+  username: postgres
+  host: db
+  # password: <%= ENV['YOUTUBE_DATABASE_PASSWORD'] %>
 
 cucumber:
   <<: *test
