@@ -51,7 +51,7 @@ pidfile "#{shared_dir}/pids/puma.pid"
 state_path "#{shared_dir}/pids/puma.state"
 activate_control_app
 
-bind 'tcp://0.0.0.0:9292'
+bind 'tcp://0.0.0.0:3000'
 
 if rails_env == "production"
   on_worker_boot do
