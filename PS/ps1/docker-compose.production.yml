@@ -5,7 +5,7 @@ services:
     volumes:
       - /private/var/lib/docker/postgres-data:/var/lib/postgresql/data
   web:
-    image: "${REPO}:${COMMIT}"
+    image: {}
     build:
       context: ../..
       dockerfile: PS/ps1/compose/passenger/Dockerfile
