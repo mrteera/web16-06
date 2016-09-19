@@ -7,4 +7,5 @@ def staging():
     env.use_ssh_config = True
 
 def deploy():
-    run("ls -l")
+    with cd('/home/web6/web16-06-docker'):
+        run("docker-compose -f PS/ps1/docker-compose.production.yml up -d")
