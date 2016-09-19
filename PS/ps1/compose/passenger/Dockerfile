@@ -16,7 +16,7 @@ RUN mv /tmp/phantomjs/bin/phantomjs /usr/local/bin/
 ADD . /web16-06
 ENV APPLICATION_ROOT /web16-06/PS/ps1
 WORKDIR $APPLICATION_ROOT
-RUN bundle install --without development test
+RUN bundle install
 
 COPY PS/ps1/compose/passenger/entrypoint.sh /entrypoint.sh
 COPY PS/ps1/compose/passenger/start-dev.sh /start-dev.sh
