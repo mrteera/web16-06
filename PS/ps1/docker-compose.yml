@@ -6,7 +6,7 @@ services:
     image: "${REPO}:${COMMIT}"
     build:
       context: ../..
-      dockerfile: PS/ps1/compose/rails/Dockerfile
+      dockerfile: PS/ps1/compose/passenger/Dockerfile
     entrypoint: /entrypoint.sh
     command: /start-dev.sh
     volumes:
