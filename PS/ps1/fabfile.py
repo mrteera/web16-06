@@ -8,4 +8,5 @@ def staging():
 
 def deploy():
     with cd('/home/web6/web16-06-docker'):
+        run("docker pull {}:{}".format(os.environ['REPO'], os.environ['COMMIT']))
         run("docker-compose -f PS/ps1/docker-compose.production.yml up -d")
