@@ -1,4 +1,4 @@
-from fabric.api import env, run
+from fabric.api import env, run, cd
 import os
 
 def staging():
