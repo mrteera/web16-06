@@ -18,8 +18,8 @@ ENV APPLICATION_ROOT /web16-06/PS/ps1
 WORKDIR $APPLICATION_ROOT
 RUN bundle install --without development test
 
-COPY PS/ps1/compose/rails/entrypoint.sh /entrypoint.sh
-COPY PS/ps1/compose/rails/start-dev.sh /start-dev.sh
+COPY PS/ps1/compose/passenger/entrypoint.sh /entrypoint.sh
+COPY PS/ps1/compose/passenger/start-dev.sh /start-dev.sh
 
 RUN rm -f /etc/service/nginx/down
 RUN rm /etc/nginx/sites-enabled/default
