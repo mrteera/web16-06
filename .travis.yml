@@ -18,7 +18,7 @@ before_script:
   - docker build -t $REPO:$COMMIT -f $REPO_DIR/compose/passenger/Dockerfile .
   - cd $REPO_DIR
   - docker-compose -f docker-compose.yml up -d
-  - docker-compose -f docker-compose.yml exec web bundle install
+  - docker-compose -f docker-compose.yml exec web bundle install --with test
 script:
   - docker-compose -f docker-compose.yml run web rubocop -RDS --fail-fast
   - docker-compose -f docker-compose.yml run web haml-lint app/views/
