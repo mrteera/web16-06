@@ -11,4 +11,4 @@ export GEM_PATH=/usr/local/rvm/gems/ruby-2.3.1:/usr/local/rvm/gems/ruby-2.3.1@gl
 export RUBY_VERSION=ruby-2.3.1
 
 /usr/local/rvm/gems/ruby-2.3.1/bin/rails db:create db:migrate db:seed
-/usr/local/rvm/gems/ruby-2.3.1/bin/rails rails s -p 3000 -b 0.0.0.0
+/usr/local/rvm/gems/ruby-2.3.1/bin/rails s -p 3000 -b 0.0.0.0
