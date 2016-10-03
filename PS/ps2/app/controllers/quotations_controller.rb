@@ -68,65 +68,44 @@ class QuotationsController < ApplicationController
       if cookies[:killedQuoteArr] == nil
         cookies[:killedQuoteArr]=JSON.generate([])
       end
-      @quotations=Quotation.where('lower(quote) like ? OR lower(author_name) like ?','%'+params[:q].downcase+'%','%'+params[:q].downcase+'%').where.not(id:JSON.parse(cookies[:killedQuoteArr])) #,fid:ind_by_quote(params[:q])
+      @quotations=Quotation.where(
+        'lower(quote) like ? OR lower(author_name) like ?',
+        '%' + params[:q].downcase + '%',
+        '%'+params[:q].downcase+'%').where.not(id:JSON.parse(cookies[:killedQuoteArr])
+      )
       format.html { render :index }
     end
   end
 
   def kill
-      if cookies[:killedQuoteArr] == nil
-        cookies[:killedQuoteArr]=JSON.generate([params[:pass]])
-      else
-        cookies[:killedQuoteArr]=JSON.generate(JSON.parse(cookies[:killedQuoteArr]) << params[:pass])
-      end
-      getcontent
-      redirect_to action: 'index'
+    if cookies[:killedQuoteArr] == nil
+      cookies[:killedQuoteArr]=JSON.generate([params[:pass]])
+    else
+      cookies[:killedQuoteArr]=JSON.generate(JSON.parse(cookies[:killedQuoteArr]) << params[:pass])
+    end
+    getcontent
+    redirect_to action: 'index'
   end
 
   def quotation_cookie_erase
-     cookies.delete :killedQuoteArr
-     redirect_to action: 'index'
+    cookies.delete :killedQuoteArr
+    redirect_to action: 'index'
   end
 
   def export
     @quotations=Quotation.all.as_json
-    pp @quotations
     respond_to do |format|
-      #format.html
-      format.xml{render xml: @quotations, content_type: Mime::XML}
-      format.json{render json: @quotations}
-      end
+      format.xml { render xml: @quotations, content_type: Mime::XML }
+      format.json { render json: @quotations }
+    end
   end
 
   def import_xml
-    # http = Net::HTTP.new('localhost', 3000)
-    # req = Net::HTTP::Get.new('/export-quotations.json')
-    # req.initialize_http_header({"Accept" => "application/json"})
-    # response = http.request(req)
-    # puts response.body
-    #
-    # http = Net::HTTP.new('localhost', 3000)
-    # req = Net::HTTP::Get.new('/export-quotations.xml')
-    # req.initialize_http_header({"Accept" => "application/xhtml+xml,application/xml;q=0.9"})
-    # response = http.request(req)
-    # @doc = Nokogiri::HTML(response.body)
-    # obj= @doc.xpath("//objects//object")
-    #
-    # obj.each do |o|
-    #   Quotation.create(
-    #       :quote=>o.css('quote').text,
-    #       :author_name=>o.css('author-name').text,
-    #       :category_id=>o.css('category-id').text
-    #   )
-    #
-    # end
-
     begin
       url =params[:xmlurl]
       get_content_type=open(url)
       if get_content_type.content_type.downcase.include? "xml"
         doc = Nokogiri::XML(
-            # open('http://web7.cs.ait.ac.th/ps2/quotations/export.xml'),
             open(params[:xmlurl]),
             nil,
             'UTF-8'
@@ -142,16 +121,15 @@ class QuotationsController < ApplicationController
     redirect_to action: 'index'
   end
 
-
   def parse_xml(doc)
     number_of_columns= doc.root.first_element_child.elements.count
     all_nodes = []
-    doc.traverse {|node|
+    doc.traverse { |node|
       all_nodes << node
     }
     items = []
     all_nodes.each_with_index { |node, index|
-      if node.text? and !node.text.strip.empty?
+      if node.text? && !node.text.strip.empty?
         items << all_nodes[index + 1].name
         items << node
       end
@@ -184,7 +162,7 @@ class QuotationsController < ApplicationController
       @check_category_exists = Category.where('lower(name) like ?',category.to_s.downcase).all #category.downcase)
       if(@check_category_exists.to_a.count==0)
         category = Category.create(
-            :name=>category
+          name: category
         )
         category_id=category.id
       else
@@ -192,9 +170,9 @@ class QuotationsController < ApplicationController
       end
 
       Quotation.create(
-          :quote=>row['quote'],
-          :author_name=>row['author-name'],
-          :category_id=>category_id
+        quote: row['quote'],
+        author_name: row['author-name'],
+        category_id: category_id
       )
     end
   end
@@ -208,7 +186,6 @@ class QuotationsController < ApplicationController
       format.json { head :no_content }
     end
   end
-
 
   private
     # Use callbacks to share common setup or constraints between actions.
