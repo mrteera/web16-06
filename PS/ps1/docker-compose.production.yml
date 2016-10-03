@@ -2,21 +2,27 @@ version: '2'
 services:
   db:
     image: postgres
+    volumes:
+      - /private/var/lib/docker/postgres-data:/var/lib/postgresql/data
   web:
-    image: "${REPO}:${COMMIT}"
+    image: {}
     build:
       context: ../..
       dockerfile: PS/ps1/compose/passenger/Dockerfile
     entrypoint: /entrypoint.sh
-    command: /start-dev.sh
-    volumes:
-      - .:/app
-    ports:
-      - "3000:3000"
+    command: /sbin/my_init
     depends_on:
       - db
+    ports:
+      - "0.0.0.0:3001:80"
+    dns:
+      - 8.8.8.8
+      - 192.41.170.15
     environment:
       - KNAPSACK_PRO_TEST_SUITE_TOKEN_MINITEST=$KNAPSACK_PRO_TEST_SUITE_TOKEN_MINITEST
       - CI=$CI
       - TRAVIS=$TRAVIS
       - COVERALLS_REPO_TOKEN=$COVERALLS_REPO_TOKEN
+      - PS1_SECRET_KEY_BASE=$PS1_SECRET_KEY_BASE
+      - http_proxy=http://192.41.170.23:3128
+      - https_proxy=http://192.41.170.23:3128

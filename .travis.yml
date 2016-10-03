@@ -9,13 +9,23 @@ env:
   matrix:
   - global:
     - DOCKER_COMPOSE_VERSION: 2
-    - REPO=mrteera/web16-06
+    - REPO=mrteera/web16-06-$TRAVIS_BRANCH
     - COMMIT=${TRAVIS_COMMIT::8}
+    - if [[ "$TRAVIS_BRANCH" == "ps1" ]]; then REPO_DIR=PS/ps1; fi
+before_install:
+  - openssl aes-256-cbc -K $encrypted_b9d256b383d7_key -iv $encrypted_b9d256b383d7_iv -in .travis/web16_deploy_key.enc -out .travis/web16_deploy_key -d
 before_script:
-  - if [[ "$TRAVIS_BRANCH" == "ps1" ]]; then cd PS/ps1; fi
-  - docker-compose -f docker-compose.yml up --build -d
-  - docker-compose -f docker-compose.yml run web rails db:create db:migrate
+  - docker build -t $REPO:$COMMIT -f $REPO_DIR/compose/passenger/Dockerfile .
+  - cd $REPO_DIR
+  - docker-compose -f docker-compose.yml up -d
 script:
-  - docker-compose -f docker-compose.yml run bash tests.sh
+  - docker-compose -f docker-compose.yml run web rubocop -RDS --fail-fast
+  - docker-compose -f docker-compose.yml run web haml-lint app/views/
+  - docker-compose -f docker-compose.yml run web rails test
+  - docker-compose -f docker-compose.yml run web rails cucumber
 after_script:
   - docker-compose down
+after_success:
+  - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
+  - docker push $REPO
+  - bash deploy.sh

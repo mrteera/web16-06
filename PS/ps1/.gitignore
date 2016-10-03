@@ -107,3 +107,4 @@ fabric.properties
 .idea
 
 .DS_Store
+.zeus.sock

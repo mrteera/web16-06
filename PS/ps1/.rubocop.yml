@@ -6,4 +6,5 @@ AllCops:
     - lib/**/*.rake
   Exclude:
     - db/schema.rb
-    - lib/tasks/cucumber.rake
+    - lib/tasks/*.rake
+    - config/*.rb
