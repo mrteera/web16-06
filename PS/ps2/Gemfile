@@ -37,6 +37,8 @@ group :development, :test do
   # database_cleaner is not required, but highly recommended
   gem 'database_cleaner'
   gem 'launchy'
+  gem 'coveralls', require: false
+  gem 'simplecov'
 end
 
 group :development do
