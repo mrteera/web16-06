@@ -17,7 +17,13 @@ class QuotationsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create quotation" do
     assert_difference('Quotation.count') do
-      post quotations_url, params: { quotation: { author_name: @quotation.author_name, category_id: @quotation.category_id, quote: @quotation.quote } }
+      post quotations_url, params: {
+        quotation: {
+          author_name: @quotation.author_name,
+          category_id: @quotation.category_id,
+          quote: @quotation.quote
+        }
+      }
     end
 
     assert_redirected_to quotation_url(Quotation.last)
@@ -34,7 +40,13 @@ class QuotationsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update quotation" do
-    patch quotation_url(@quotation), params: { quotation: { author_name: @quotation.author_name, category_id: @quotation.category_id, quote: @quotation.quote } }
+    patch quotation_url(@quotation), params: {
+      quotation: {
+        author_name: @quotation.author_name,
+        category_id: @quotation.category_id,
+        quote: @quotation.quote
+      }
+    }
     assert_redirected_to quotation_url(@quotation)
   end
 
