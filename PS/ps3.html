@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>PS 3</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            padding: 10px;
+            color: #2E2F30;
+            margin: 0 300px;
+            font-size: 14px;
+        }
+
+        .qn {
+            font-weight: 500;
+            padding: 5px;
+            font-size: 14px;
+            margin-top: 35px;
+            margin-bottom: 5px;
+            color:#333;
+        }
+        .setwidth
+        {
+            width: 170px;display: inline-block;
+        }
+        .ans {
+            padding: 5px; font-weight: 300; color: #000;
+        }
+
+        .addPadding {
+            padding-top: 10px;
+
+        }
+        .highlight{
+
+            padding-right: 10px; font-weight: 400;
+        }
+        .thumb
+        {border: 5px solid #DADADA; width: 100px; margin-bottom: 5px}
+        a{text-decoration:none}
+    </style>
+
+</head>
+
+<br>
+
+<h1>Planning our web application</h1>
+
+<div class="qn">1. Answer the following questions:</div>
+
+<div class="qn">
+    (a) What will people be able learn about in the community that you’re building? Alternatively, if you are automating some collaborative workﬂow, what work will people accomplish with your system?
+</div>
+<div class="ans">Through this community people will collaboratively translate articles from various sources. This will help grow the translation community.</div>
+
+<div class="qn">
+    (b) What do you want people to say about your service after a visit?
+</div>
+<div class="ans">We want people to say that this is an intuitive and reliable platform for translating documents.</div>
+
+<div class="qn">
+    (c) What are the relevant distinct user classes?
+</div>
+
+<div class="ans">On the basis of privilege we will have two user classes:
+
+<div class="addPadding">
+    1. Visitors : These are the users who do not register in the community and are just the site visitors. They do not have access to the translation features i.e they cannot create or edit any translation document. They can only read the translated contents.
+</div>
+<div class="addPadding">
+    2. Administrators :They have complete access to the system. He/She can delete documents and even disable user accounts.
+</div>
+</br>
+</br>
+<div>
+    And on the basis of the types of users, our community will have:
+    <div class="addPadding">1. Tech enthusiasts who are eager to share exciting contents to Thai communities</div>
+    <div class="addPadding">2. Bloggers who want important articles and blog posts to be made available to larger audience</div>
+    <div class="addPadding">3. Translators</div>
+    <div class="addPadding">4. Academians</div>
+</div>
+</div>
+<div class="qn">
+
+    (d) What should a user on a smartphone be able to do?
+</div>
+
+<div class="ans">
+    The user on a smartphone should be able to access all major features such as registration, authentication and translation.
+</div>
+
+<div class="qn">
+    2. Build two or three proﬁles for users of your application. A proﬁle page contains the following information:</br>
+    (a) a picture of the user,</br>
+    (b) the user’s name, age, occupation, marital status, housing situation, and income,</br>
+    (c) the user’s short-term and long-term goals relevant to the online community that you’re building,</br>
+    (d) the immediate questions that this user will bring to the site,</br>
+    (e) the kind of computer equipment and connection in this person’s house, and</br>
+    (f) any other information that will help to humanize this ﬁctitious person. See the sample plan on the course Web page for examples.</br>
+</div>
+<div class="ans">
+    <div class="addPadding">
+         <span class="highlight">Member 1</span>
+        </br>
+        </br>
+        <div>
+            <img src="https://s3-ap-southeast-1.amazonaws.com/web16-06-report/persona/14079558_1225583040806866_7504439121244642689_n.jpg" class="thumb">
+        </div>
+        <span class="highlight">Name:</span> Dr. Kan Ouivirach</br>
+        <span class="highlight">Age:</span> 32, unmarried</br>
+        <span class="highlight">Occupation:</span>Research and Development Engineer, Pronto Tools</br>
+        <span class="highlight">Translation experience:</span>I have been trying to translate <a href="http://www.phptherightway.com/" target="_blank">http://www.phptherightway.com/</a>
+        and <a href="https://github.com/zkan/progit2" target="_blank">https://github.com/zkan/progit2</a> but haven't done it successfully. GitHub is not the tool that gives good translation experience.</br>
+        <span class="highlight">Initial document to translate:</span>Any machine learning/data related news or books - to be more specific, it could be one of ebooks here: <a href="http://www.oreilly.com/data/free/archive.html" target="_blank">
+        http://www.oreilly.com/data/free/archive.html</a></br>
+        <span class="highlight">Other interests:</span>Anything related to data and technology</br>
+    </div>
+    </br>
+    </br>
+    <div class="addPadding">
+        <span class="highlight"> Member 2</span>
+        </br>
+        </br>
+
+        <div>
+            <img src="https://s3-ap-southeast-1.amazonaws.com/web16-06-report/persona/11665655_10153424813338540_670550835396704334_n.jpg" class="thumb">
+        </div>
+        <span class="highlight">Name:</span>Aruj Thirawat</br>
+        <span class="highlight">Age:</span>29, unmarried</br>
+        <span class="highlight">Occupation:</span> Tech Writer</br>
+        <span class="highlight">Translation experience:</span> Translated news and documents about IT</br>
+        <span class="highlight">Initial document to translate:</span>Press release from vendors</br>
+        <span class="highlight">Other interests:</span>Food, cartoon, games</br>
+    </div>
+    </br>
+</div>
+
+<div class="qn">3. For each class of user identiﬁed in Exercise 1a, produce a textual or graphical usage scenario for how that user will experience your service.
+</div>
+<div class="ans">
+    <div class="addPadding">
+      <b>  Members</b></br>
+        </br>
+        <span class="highlight">Step 1 :</span> Registration</br>
+        <span class="highlight">Step 2 :</span>Authentication</br>
+    </div>
+    <div class="addPadding">
+        Scenario 1</br>
+        </br>
+        <span class="highlight">Step 3 :</span> Create a new document</br>
+        <span class="highlight">Step 4 :</span> Copy paste the english version of the article/document</br>
+        <span class="highlight">Step 5 :</span> Translate the content</br>
+        <span class="highlight">Step 6 :</span> Save the translated document</br>
+    </div>
+    <div class="addPadding">
+        Scenario 2</br>
+        </br>
+        <span class="highlight">Step 3 :</span> Open an existing document (created by himself/herself or by other members)</br>
+        <span class="highlight">Step 4 :</span> Continue the translation</br>
+        <span class="highlight">Step 5 :</span> Save the translated document</br>
+    </div>
+    <div class="addPadding"></br>
+        <b>Visitors</b></br>
+        </br>
+        <span class="highlight">Action : </span>View translated document</br>
+    </div>
+    <div class="addPadding"></br>
+        <b>Administrators</b></br>
+        </br>
+        <span class="highlight">Step 1 :</span> Authentication</br>
+        <span class="highlight">Action :</span> Delete old/irrelevant/incomplete documents if necessary</br>
+        <span class="highlight">Action :</span> Spend any member if necessary</br>
+    </div>
+</div>
+<div class="qn">
+    4. Evaluate oﬄine alternatives. You ought to have a good reason for building an information system. You need a convincing answer for why we need this system rather than a book, a pencil, and paper. Explain the available alternatives and explain the best features of these alternatives. Justify why your system is necessary.
+</div>
+<div class="ans">
+    The offline version of our application would be like people gathering at a coffee shop or a coworking space or some place else with the intention of translating a single document.
+    This is most likely a difficult and infeasible concept to implement in the offline world.
+</div>
+<div class="qn">
+    5. Evaluate online alternatives. Find the best existing online communities in your subject area. Note how closely they conform to the six elements of sustainability (magnet content, collaboration, searching and browsing capabilities, delegated moderation, means of removing bozos, and means for extending the community. Also write down anything strikingly good or bad about the registration process and the mechanisms of collaboration, e.g., in discussion forums, comments on articles, and chat rooms. Look for voice and mobile interfaces. If present, try them out. Look for evidence of personalization and direct controls over preferences.
+</div>
+<div class="ans">
+    The best alternative we have come accorss is Transifex (<a href="https://www.transifex.com/" target="_blank">https://www.transifex.com/</a>). It is a commercial translation platform.
+    It allows users to translate documents and also provides quality check feature at different sections of the translated content.
+    <br>
+    <br>Magnet content would be the text source from famous partner and organization. E.g. Coursera, edX. It has the searching and browsing capabilities such as search by project name, search for people speaking specific language etc. We did not come across any moderation feature or bozo removal in the site. Transifex extends its community through business partners like Coursera and they also provide open source program as free usage for open source project (e.g. Django). The site lacks clarity in its interface. It takes several steps to get to the actual content that your are looking for. As a new user of transifex, it took us an unexpected amount of effort to evaluate the site. We did not experience personalization in the platform.
+
+</div>
+<div class="qn">
+    6. Identify where the magnet content for your system is going to come from.
+</div>
+<div class="ans">
+    The magnet content for our community will primarily be the good quality translations. The goodwill created by such content will help bring in more community members. Also, the contents authored by influential people will serve as magnet content. To clarify, an example of influential people would be someone popular in a strong community like tech community.
+</div>
+
+<div class="qn">
+    7. Decide on hostname and ﬁgure out DNS registration procedures. Be sure to look into the options for hosting of your web site. Ideally, you should all have a real hostname for your system, pointing to your CSIM server, by the end of the semester. At the end of the semester, you should also be ready to place your site at a more permanent home. Please include a plan for how you will do this. Note that AIT, CSIM, or AIT SU could probably be persuaded to host some of your groups’ sites. Others would be more appropriately hosted oﬀsite.
+</div>
+<div class="ans">
+    The DNS name that we have selected is “mejelly.com”. It comes from one of the episode from Doraemon, which was about a translation jelly. Also, “Me Jelly” translates to “I have jelly” in Thai Language. Later we can play around with this idea as a theme to implement gamification into the application. The cost for this domain name is 379 Bath (1-year lease with provided by Namecheap). We have changed the default DNS service to CloudFlare so that we can also use their CDN for static files (e.g. CSS, JS).
+</div>
+
+<div class="qn">
+    8. Describe the intellectual property rights of you as developers, authors as contributors, and so on.
+</div>
+<div class="ans">
+    Intellectual property rights for source code: GNU GPLv3 We choose GNU GPLv3 because we care about sharing improvements. About the translated content it would be Copyrights of the author.
+</div>
+
+
+<h1>...</h1>
+<div>
+    <div class="highlight"><div class="setwidth">Database Backup</div>: <a href="http://web6.cs.ait.ac.th/db_backup_latest.sql.bz2" target="_blank">Latest Database</a> </div>
+    <div class="highlight"><div class="setwidth">Contineous Integration</div>: <a href="https://travis-ci.org/mrteera/web16-06" target="_blank">Travis CI</a> </div>
+    <div class="highlight"><div class="setwidth">Issue Tracker </div>: <a href="https://github.com/mrteera/web16-06/projects/1" target="_blank">GitHub</a> </div>
+</div>
+
+</br>
+</br>
+</br>
+<div class="addPadding">
+    <b>References:</b>
+    </br>
+    </br>
+    <a href="http://choosealicense.com/licenses/gpl-3.0/" target="_blank">http://choosealicense.com/licenses/gpl-3.0/</a></br>
+    <a href="http://law.stackexchange.com/a/9036" target="_blank">http://law.stackexchange.com/a/9036</a></br>
+    <a href="https://www.transifex.com/legal/terms/" target="_blank">https://www.transifex.com/legal/terms/</a><br>
+    <a href="https://www.transifex.com/legal/dmca/" target="_blank">https://www.transifex.com/legal/dmca/</a></br>
+    <a href="http://prachatai.com/journal/2013/07/47801" target="_blank">http://prachatai.com/journal/2013/07/47801</a></br>
+    <a href="http://prachatai.com/journal/2013/09/48714" target="_blank">http://prachatai.com/journal/2013/09/48714</a></br>
+    <a href="https://www.transifex.com/legal/dmca/" target="_blank">https://th.wikipedia.org/wiki/วิกิพีเดีย:เขียนงานอย่างไรไม่ละเมิดลิขสิทธิ์</a></br>
+</div>
+
+</body>
+
+</html>
