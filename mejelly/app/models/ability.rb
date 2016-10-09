@@ -32,5 +32,6 @@ class Ability
 
     can :manage, :all if user.is_admin == true
     cannot :access, :rails_admin if user.is_admin == false
+
   end
 end
