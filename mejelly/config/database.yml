@@ -82,7 +82,7 @@ production:
   <<: *default
   database: mejelly_production
   username: mejelly
-  password: <%= ENV['MEJELLY_DATABASE_PASSWORD'] %>
+  host: db
 
 cucumber:
   <<: *test
