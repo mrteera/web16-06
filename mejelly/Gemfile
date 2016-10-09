@@ -38,6 +38,7 @@ group :development, :test do
   gem 'launchy'
   gem 'cucumber-rails', :require => false
   gem 'database_cleaner'
+  gem 'rubocop', require: false
 end
 
 group :test do

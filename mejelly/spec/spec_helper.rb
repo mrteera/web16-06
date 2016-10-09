@@ -111,10 +111,10 @@ RSpec.configure do |config|
 end
 
 Capybara.register_driver :poltergeist do |app|
-  Capybara::Poltergeist::Driver.new(app, {
+  Capybara::Poltergeist::Driver.new(app,
       debug: true,
       js_errors: true,
-  })
+  )
 end
 
 Capybara.javascript_driver = :poltergeist
