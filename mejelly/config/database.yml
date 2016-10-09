@@ -83,7 +83,7 @@ test: &test
 production:
   <<: *default
   database: mejelly_production
-  username: mejelly
+  username: postgres
   host: db
 
 cucumber:
