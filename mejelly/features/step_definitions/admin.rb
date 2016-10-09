@@ -7,6 +7,7 @@ Given(/^I am signed in$/) do
   fill_in 'Email', with: @reshma.email
   fill_in 'Password', with: @reshma.password
   click_button 'Log in'
+#  save_and_open_page
 end
 
 Given(/^There is a new memember$/) do
@@ -18,6 +19,7 @@ When(/^I visit the admin dashboard$/) do
 end
 
 When(/^I navigate to the Users menu$/) do
+  #save_and_open_page
   first("a",text: 'Users').click
 end
 
