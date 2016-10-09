@@ -24,7 +24,7 @@ script:
   - docker-compose -f docker-compose.yml run web rubocop -RDS --fail-fast
   - docker-compose -f docker-compose.yml run web haml-lint app/views/
   - if [[ "$TRAVIS_BRANCH" == "ps1" ]]; then docker-compose -f docker-compose.yml run web rails test; fi
-  - if [[ "$TRAVIS_BRANCH" == "mejelly" ]]; then docker-compose -f docker-compose.yml run web rspec; fi
+  - if [[ "$TRAVIS_BRANCH" == "mejelly" ]]; then docker-compose -f docker-compose.yml run web bundle exec rspec; fi
   - docker-compose -f docker-compose.yml run web rails cucumber
 after_script:
   - docker-compose down
