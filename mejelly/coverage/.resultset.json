@@ -2,20 +2,78 @@
   "RSpec": {
     "coverage": {
       "/home/reshma/myfiles/web16-06/mejelly/app/helpers/application_helper.rb": [
+        1,
+        null
+      ],
+      "/home/reshma/myfiles/web16-06/mejelly/app/helpers/home_helper.rb": [
+        1,
+        null
+      ],
+      "/home/reshma/myfiles/web16-06/mejelly/app/models/user.rb": [
+        1,
+        null,
+        null,
+        1,
+        null,
+        null,
+        1,
         0,
-        0
+        null,
+        null
       ],
       "/home/reshma/myfiles/web16-06/mejelly/app/models/application_record.rb": [
-        0,
-        0,
-        0
+        1,
+        1,
+        null
+      ],
+      "/home/reshma/myfiles/web16-06/mejelly/app/controllers/home_controller.rb": [
+        1,
+        1,
+        null,
+        null
       ],
       "/home/reshma/myfiles/web16-06/mejelly/app/controllers/application_controller.rb": [
+        1,
+        1,
+        null
+      ],
+      "/home/reshma/myfiles/web16-06/mejelly/app/models/ability.rb": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
         0,
         0,
         0
       ]
     },
-    "timestamp": 1475986820
+    "timestamp": 1476024403
   }
 }
