@@ -7,7 +7,6 @@ Given(/^I am signed in$/) do
   fill_in 'Email', with: @reshma.email
   fill_in 'Password', with: @reshma.password
   click_button 'Log in'
-#  save_and_open_page
 end
 
 Given(/^There is a new memember$/) do

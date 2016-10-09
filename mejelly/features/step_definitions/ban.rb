@@ -21,5 +21,19 @@ end
 
 Then(/^I click save$/) do
   click_button 'Save'
-  save_and_open_page
+end
+
+Given(/^He is banned by admin$/) do
+  @teera = FactoryGirl.create :banned_member
+end
+
+When(/^He tries to sign in$/) do
+  visit 'users/sign_in'
+  fill_in 'Email', with: @teera.email
+  fill_in 'Password', with: @teera.password
+  click_button 'Log in'
+end
+
+Then(/^He is denied access$/) do
+  expect(page).to have_content('Your account is not activated yet.')
 end

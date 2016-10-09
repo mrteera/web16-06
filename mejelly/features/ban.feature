@@ -11,3 +11,9 @@ Feature: Ban an inappropriate user
     Then I click on the edit button
     And I select the is_banned flag
     And I click save
+
+  Scenario: Banned user Teera attempts to log in
+    Given There is an inappropriate user
+    And He is banned by admin
+    When He tries to sign in
+    Then He is denied access
