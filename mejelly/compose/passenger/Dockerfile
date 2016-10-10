@@ -27,4 +27,9 @@ ENV DOCKER_DIR mejelly/compose/passenger
 ADD $DOCKER_DIR/mejelly.conf /etc/nginx/sites-enabled/mejelly.conf
 ADD $DOCKER_DIR/secret_key.conf /etc/nginx/main.d/secret_key.conf
 
+RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginx-selfsigned.key -out /etc/ssl/certs/nginx-selfsigned.crt
+RUN openssl dhparam -out /etc/ssl/certs/dhparam.pem 1024
+ADD $DOCKER_DIR/self-signed.conf /etc/nginx/snippets/self-signed.conf
+ADD $DOCKER_DIR/ssl-params.conf /etc/nginx/snippets/ssl-params.conf
+
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
