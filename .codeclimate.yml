@@ -1,15 +1,14 @@
 engines:
   brakeman:
     enabled: true
-    paths:
-    - "mejelly"
   bundler-audit:
     enabled: true
   reek:
     enabled: true
 ratings:
   paths:
-  - "mejelly/**.rb"
+  - mejelly/**
+  - "**.rb"
 exclude_paths:
 - spec/**/*
 - "**/vendor/**/*"
