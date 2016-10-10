@@ -1,0 +1,16 @@
+engines:
+  rubocop:
+    enabled: false
+  duplication:
+    enabled: true
+    config:
+      languages:
+      - ruby
+        #mass_threshold: 30
+      - javascript
+ratings:
+  paths:
+  - "mejelly/app/**.rb"
+exclude_paths:
+- spec/**/*
+- "**/vendor/**/*"
