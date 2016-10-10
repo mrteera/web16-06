@@ -1,6 +1,8 @@
 engines:
   brakeman:
     enabled: true
+    config:
+      path: mejelly
   bundler-audit:
     enabled: true
   reek:
