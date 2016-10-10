@@ -1,9 +1,4 @@
 engines:
-    config:
-      languages:
-      - ruby
-        #mass_threshold: 30
-      - javascript
   brakeman:
     enabled: true
   bundler-audit:
