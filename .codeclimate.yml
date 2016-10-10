@@ -3,7 +3,7 @@ engines:
     enabled: true
   bundler-audit:
     enabled: true
- reek:
+  reek:
     enabled: true
 ratings:
   paths:
