@@ -3,9 +3,11 @@ engines:
     enabled: true
   bundler-audit:
     enabled: true
+ reek:
+    enabled: true
 ratings:
   paths:
-  - "mejelly/app/**.rb"
+  - "mejelly/**.rb"
 exclude_paths:
 - spec/**/*
 - "**/vendor/**/*"
