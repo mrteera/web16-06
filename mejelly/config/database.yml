@@ -21,6 +21,10 @@ default: &default
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
+dev_without_docker:
+  <<: *default
+  database: mejelly_development
+
 development:
   <<: *default
   database: mejelly_development
