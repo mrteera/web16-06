@@ -4,7 +4,7 @@
 <head>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
     <meta charset="UTF-8">
-    <title>PS 3</title>
+    <title>Me Jelly</title>
     <style>
         body {
             font-family: 'Roboto', sans-serif;
@@ -106,13 +106,14 @@
 
         <div class="qn">Audit your software for any sensitive data like database passwords make sure they are secure. Document the result of your audit and plan.</div>
         <div class="ans">
-            <br/><br/>Answered in the Github issue:
+           Answered in the Github issue:
             <a target="_blank" href="https://github.com/mrteera/web16-06/issues/30#issuecomment-253213652">https://github.com/mrteera/web16-06/issues/30#issuecomment-253213652</a></div>
 
         <div class="qn">Define your user data model.</div>
         <div class="ans">
 
-            <br/><br/>Answered in the Github issue: <a target="_blank" href="https://github.com/mrteera/web16-06/issues/26#issuecomment-252470582">https://github.com/mrteera/web16-06/issues/26#issuecomment-252470582</a></div>
+            Answered in the Github issue: <a target="_blank" href="https://github.com/mrteera/web16-06/issues/26#issuecomment-252470582">https://github.com/mrteera/web16-06/issues/26#issuecomment-252470582</a>
+        </div>
 
         <div class="qn">Sketch your user registration and management page flow. See the example on the course home page for an idea.</div>
         <div class="ans"><img src="https://cloud.githubusercontent.com/assets/6426471/19314376/1d004b96-90c4-11e6-905d-0b8dff0db630.png"/>
@@ -122,11 +123,13 @@
 
         <div class="qn">Using the techniques of test-first and behavior-driven development we’ve studied in class and lab, build up the basic user registraion and login pages.</div>
         <div class="ans">
+            <img src="https://cloud.githubusercontent.com/assets/1741387/19320341/12dccbdc-90db-11e6-9004-8cbe7fd63aa7.png">
+            <br><img src="https://cloud.githubusercontent.com/assets/6426471/19316082/4cf330e2-90ca-11e6-90cb-693570b8b8ca.png">
             <br/><br/>Issue in Github: <a target="_blank" href="https://github.com/mrteera/web16-06/issues/28#issuecomment-253245302">https://github.com/mrteera/web16-06/issues/28#issuecomment-253245302</a></div>
 
         <div class="qn">Set up SSL for the login page to prevent password sniffing, and set up SSL for all authenticated interaction if session hijacking is a concern.</div>
         <div class="ans">
-        <br/>We have enabled `config.force_ssl = true` in `config/environments/production.rb` to secure connection for a cookie for every pages on production, and we also setup SSL (HTTPS) using Apache and certificate from Let’s Encrypt. Here is the SSL test report from SSL Labs:
+        We have enabled `config.force_ssl = true` in `config/environments/production.rb` to secure connection for a cookie for every pages on production, and we also setup SSL (HTTPS) using Apache and certificate from Let’s Encrypt. Here is the SSL test report from SSL Labs:
 
         <a target="_blank" href="https://www.ssllabs.com/ssltest/analyze.html?d=web6.cs.ait.ac.th&hideResults=on">https://www.ssllabs.com/ssltest/analyze.html?d=web6.cs.ait.ac.th&hideResults=on</a>
             <br/><img src="https://cloud.githubusercontent.com/assets/1741387/19315714/f422aaf2-90c8-11e6-8421-cc49be421a8e.png">
@@ -137,7 +140,8 @@
         </div>
         <div class="qn">Again using BDD, build the user administration pages. Make sure admin can 1) see recently registered users, 2) ban a user, and 3) see statistics on user registrations.</div>
         <div class="ans">The commit detail is in the issue: <a target="_blank" href="https://github.com/mrteera/web16-06/issues/29">https://github.com/mrteera/web16-06/issues/29</a>
-        <br>Cucumber test details: <a target="_blank" href="https://github.com/mrteera/web16-06/issues/28#issuecomment-253245302">https://github.com/mrteera/web16-06/issues/28#issuecomment-253245302</a>
+
+
         </div>
 
 
@@ -146,15 +150,19 @@
         <div class="ans">
         We have used github’s issue tracker throughout the workflow of ps4. We created new issue for every task at hand and linked our git commit message to the issue (using #issue-number in our commit message). And we categorized our issues based on its current stage (Backlog, In Progress, Testing and Done).
             <br>Details: <a target="_blank" href="https://github.com/mrteera/web16-06/projects/1">https://github.com/mrteera/web16-06/projects/1</a>
-            <br/><br/>Issue in Github: <a target="_blank" href="https://github.com/mrteera/web16-06/issues/28">https://github.com/mrteera/web16-06/issues/28</a>
+            <br/><br/>Issues in Github: <a target="_blank" href="https://github.com/mrteera/web16-06/issues/28">https://github.com/mrteera/web16-06/issues/28</a>
 
             <br/><a target="_blank" href="https://github.com/mrteera/web16-06/issues/33">https://github.com/mrteera/web16-06/issues/33</a><br/>
+            <br/>Email Notification:<br/>
+            <img src="https://cloud.githubusercontent.com/assets/6426471/19320811/f4748804-90dc-11e6-806e-c65546bb5d9e.png"/>
+           <br/> <img src="https://cloud.githubusercontent.com/assets/6426471/19320810/f4729b5c-90dc-11e6-8afa-3e930fa74bb4.png"/>
+            <br/>
         For CI and deployment, here is our configuration: <a target="_blank" href="https://github.com/mrteera/web16-06/blob/mejelly/.travis.yml">https://github.com/mrteera/web16-06/blob/mejelly/.travis.yml</a>
 
         </div>
         <div class="qn">Check your model for referential integrity and queries that take a long time and might require further optimization.</div>
         <div class="ans">
-        <br/>Since our system will only have two user roles (admin and member), we have decided to use boolean valued column to distinguish between the two roles. So, we only have User model in the system at this stage of development. Once we start working on more features of our project, we will ensure referential integrity among our models.
+        Since our system will only have two user roles (admin and member), we have decided to use boolean valued column to distinguish between the two roles. So, we only have User model in the system at this stage of development. Once we start working on more features of our project, we will ensure referential integrity among our models.
         <br/>
         As for the queries, they are very basic queries at the moment and are well optimized.
             <br/><br/>Issue in Github: <a target="_blank" href="https://github.com/mrteera/web16-06/issues/28">https://github.com/mrteera/web16-06/issues/28</a>
@@ -162,6 +170,7 @@
         </div>
 
         <div class="qn">Put your work online and push to your Git repo when you. are done. Your site should now contain an index pointing to your “Basics” solutions and the “Documentation” for your site. We should also be able to see that your code and documentation have been checked in to git. Please also provide a link to your latest database dump somewhere on your site so that we can see that you’ve done the data definitions for user registration and management.</div>
+        <div class="ans">Link to database dump: <a href="http://web6.cs.ait.ac.th/db_backup_latest.sql.bz2" target="_blank">http://web6.cs.ait.ac.th/db_backup_latest.sql.bz2</a> </div>
 
 
 
