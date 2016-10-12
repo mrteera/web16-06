@@ -13,4 +13,22 @@
  *= require_tree .
  *= require_self
  */
-#userStat td{padding-right: 15px}
+#userStat td{
+    padding-right: 15px;
+    border: none;
+    padding-top: 7px;
+}
+body {
+    font-family: 'Roboto', sans-serif;
+    padding: 10px;
+    color: #2E2F30;
+    margin: 0 300px;
+    font-size: 14px;
+}
+h1{
+    font-weight: 600;
+}
+.statNum {
+    font-weight: 500;
+
+}
