@@ -25,6 +25,23 @@ Rails.application.configure do
   # Do not fallback to assets pipeline if a precompiled asset is missed.
   config.assets.compile = false
 
+  config.assets.precompile << Proc.new { |path|
+    if path =~ /\.(css|js)\z/
+      full_path = @assets ||= Rails.application.assets || Sprockets::Railtie.build_environment(Rails.application)
+  full_path = @assets.resolve(path)
+      app_assets_path = Rails.root.join('app', 'assets').to_path
+      if full_path.starts_with? app_assets_path
+        puts "including asset: " + full_path
+        true
+      else
+        puts "excluding asset: " + full_path
+        false
+      end
+    else
+      false
+    end
+  }
+
   # `config.assets.precompile` and `config.assets.version` have moved to config/initializers/assets.rb
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
