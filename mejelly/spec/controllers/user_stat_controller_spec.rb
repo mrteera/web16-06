@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe UserStatsController, type: :controller do
+RSpec.describe UserStatController, type: :controller do
 
   describe "GET #index" do
     it "returns http success" do
