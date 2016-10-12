@@ -1,6 +1,6 @@
 require 'simplecov'
-# require 'coveralls'
-# SimpleCov.formatter = Coveralls::SimpleCov::Formatter
+require 'coveralls'
+SimpleCov.formatter = Coveralls::SimpleCov::Formatter
 SimpleCov.start 'rails' do
   add_filter 'app/channels/application_cable/channel.rb'
   add_filter 'app/channels/application_cable/connection.rb'
