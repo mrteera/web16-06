@@ -23,5 +23,4 @@ end
 
 Then(/^I should see the statistics$/) do
   expect(page).to have_content('User Statistics')
- # save_and_open_page
 end
