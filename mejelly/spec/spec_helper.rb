@@ -1,13 +1,3 @@
-require 'simplecov'
-require 'coveralls'
-SimpleCov.formatter = Coveralls::SimpleCov::Formatter
-SimpleCov.start 'rails' do
-  add_filter 'app/channels/application_cable/channel.rb'
-  add_filter 'app/channels/application_cable/connection.rb'
-  add_filter 'app/jobs/application_job.rb'
-  add_filter 'app/mailers/application_mailer.rb'
-end
-
 require 'capybara/rspec'
 require 'capybara/poltergeist'
 require 'factory_girl_rails'
@@ -31,6 +21,11 @@ require 'factory_girl_rails'
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
+
+  # config.before(:suite) do
+  #   FactoryGirl.find_definitions
+  # end
+
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
