@@ -3,7 +3,7 @@ services:
   db:
     image: postgres
     volumes:
-      - /private/var/lib/docker/postgres-data:/var/lib/postgresql/data
+      - /private/var/lib/docker/mejelly-data:/var/lib/postgresql/data
   web:
     image: {}
     build:
