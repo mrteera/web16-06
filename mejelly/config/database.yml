@@ -85,9 +85,9 @@ test: &test
 #
 production:
   <<: *default
-  database: <%= ENV['PRODUCTION_DB_NAME'] %>
-  username: <%= ENV['PRODUCTION_DB_USERNAME'] %>
-  host: <%= ENV['PRODUCTION_DB_HOST'] %>
+  database: mejelly_production
+  username: postgres
+  host: db
 
 cucumber:
   <<: *test
