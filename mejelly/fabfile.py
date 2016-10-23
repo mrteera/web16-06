@@ -11,3 +11,4 @@ def deploy():
         run("docker pull {}:{}".format(os.environ['REPO'], os.environ['COMMIT']))
         run("docker-compose -f mejelly/docker-compose.production.yml run web rails db:migrate")
         run("docker-compose -f mejelly/docker-compose.production.yml run web rails assets:precompile")
+        run("docker-compose -f mejelly/docker-compose.production.yml run web service nginx reload")
