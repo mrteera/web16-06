@@ -1,4 +1,6 @@
-language: ruby
+language: node_js
+node_js:
+  - '5'
 branches:
   only:
     - ps1
@@ -32,3 +34,5 @@ after_success:
   - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
   - docker push $REPO
   - bash deploy.sh
+  - if [[ "$TRAVIS_BRANCH" == "mejelly" ]]; then npm install --global psi; fi
+  - if [[ "$TRAVIS_BRANCH" == "mejelly" ]]; then psi https://web6.cs.ait.ac.th/mejelly --strategy=desktop --threshold=90; fi
