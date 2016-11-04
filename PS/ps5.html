@@ -40,7 +40,10 @@
 
             padding-right: 10px; font-weight: 400;
         }
-        a{text-decoration:none}
+        a{
+            text-decoration:none;
+            color: blue;
+        }
         img{
             max-width: 100%;padding: 30px 0;
         }
@@ -57,12 +60,20 @@
         <li>Translated contents in Thai</li>
         <li>Comments on Translated content page</li>
       </ul>
-The original articles in English will store on database. It is a content that user want to translate into Thai. We will store the translated contents and comments on Gist which also provide version control system. An admin can flag an article if it has an inappropriate content, so the flagged articles will be hidden and cannot be accessed.</div>
-      <div class="qn">Design your content data model and discuss the implications of your design choices with potential users of the system. In general, there should be at least one category of user-submitted content with authoring workflow specific to your project and at least one question and answer forum. However, the specifics will be very dependent on your project’s requirements. Document the design and your discussions on your site.</div>
+      The original articles in English will store on database. It is a content that user want to translate into Thai. We will store the translated contents and comments on <a target="_blank" href="https://developer.github.com/v3/gists/">Gist</a> which also provide version control system. An admin can flag an article if it has an inappropriate content, so the flagged articles will be hidden and cannot be accessed.</div>
+    <div class="qn">Design your content data model and discuss the implications of your design choices with potential users of the system. In general, there should be at least one category of user-submitted content with authoring workflow specific to your project and at least one question and answer forum. However, the specifics will be very dependent on your project’s requirements. Document the design and your discussions on your site. <br />
+      Specify the workflow for each kind of content on your site and discuss the implications of your design choices with potential users of the system. Document the workflow design and your discussions on your site.</div>
       <div class="ans">
-        <img src="https://cloud.githubusercontent.com/assets/1741387/19999755/ce4fafce-a2a6-11e6-9c00-3b6df2f821db.png"/></div>
-      <div class="qn">Specify the workflow for each kind of content on your site and discuss the implications of your design choices with potential users of the system. Document the workflow design and your discussions on your site.</div>
-      <div class="ans"><img src="https://cloud.githubusercontent.com/assets/1741387/20001437/bb134f80-a2ae-11e6-92a8-75ced817f820.png"/></div>
+        <img src="https://cloud.githubusercontent.com/assets/1741387/20013992/cc426c30-a2e7-11e6-8474-74fbb14637cb.png"/>
+      </div>
+      <div class="ans">
+        <img src="https://cloud.githubusercontent.com/assets/1741387/20013656/93eb3930-a2e6-11e6-9a36-ae92cc036772.png"/>
+      </div>
+      <div class="ans"><b>Discussion with potential user</b><br />
+        <img src="https://cloud.githubusercontent.com/assets/1741387/20010241/f72f7de2-a2d9-11e6-9868-11dd76038a97.png"/><br />
+        Full chat log: <a target="_blank" href="https://gist.github.com/mrteera/99cad269e048dd93d993b9838453a940">https://gist.github.com/mrteera/99cad269e048dd93d993b9838453a940</a>
+      </div>
+
       <div class="qn">Design your versioning system. What is the versioning system for each type of content? Do you need a complete history of every version, or just a current version with the author of the last version? Make sure you think carefully about the needs of the user community. Document the versioning design on your site.</div>
       <div class="ans">We need versioning system for the translated content. We are going to store them on Gist via its API (revision concept is similar to git) and it provides a new revision every time the user save the translation. Users can view all revision of the translated contents, and they can copy some part of the text from an old revision and update as the latest revision.</div>
       <div class="qn"> Write UATs for a “skeletal” implementation of the workflow for at least one type of content on your site then get the UATs to pass. Users should be able to get something up on your server and see it published.</div>
