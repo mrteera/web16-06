@@ -77,7 +77,15 @@
       <div class="qn">Design your versioning system. What is the versioning system for each type of content? Do you need a complete history of every version, or just a current version with the author of the last version? Make sure you think carefully about the needs of the user community. Document the versioning design on your site.</div>
       <div class="ans">We need versioning system for the translated content. We are going to store them on Gist via its API (revision concept is similar to git) and it provides a new revision every time the user save the translation. Users can view all revision of the translated contents, and they can copy some part of the text from an old revision and update as the latest revision.</div>
       <div class="qn"> Write UATs for a “skeletal” implementation of the workflow for at least one type of content on your site then get the UATs to pass. Users should be able to get something up on your server and see it published.</div>
-
+      <div class="ans">
+        When a user register, we can see detail at Auth0 backend. If there are a malicious user we can ban them here.<br />
+        <img src="https://cloud.githubusercontent.com/assets/1741387/20015257/55c819c8-a2ed-11e6-8b7a-00a8f62d7b09.png"/><br />
+        <img src="https://cloud.githubusercontent.com/assets/1741387/20010410/977e86f8-a2da-11e6-9aca-12d354acdecf.png"/><br />
+        <img src="https://cloud.githubusercontent.com/assets/1741387/20015192/02b02f5a-a2ed-11e6-8044-99e30b760dd2.png"/><br />
+        A created article from our system: 
+        <a target="_blank" href="https://gist.github.com/zkan/e4abc7a14aaeb4ea26052d18262ecf47">https://gist.github.com/zkan/e4abc7a14aaeb4ea26052d18262ecf47</a><br />
+        <img src="https://cloud.githubusercontent.com/assets/1741387/20010447/b3b17c4a-a2da-11e6-91b7-6aefc4f7c6c9.png"/>
+      </div>
     </div>
 </body>
 </html>
