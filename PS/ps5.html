@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Me Jelly</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            padding: 10px;
+            color: #2E2F30;
+            margin: 0 300px;
+            font-size: 14px;
+            line-height: 18px;
+        }
+
+        .qn {
+            font-weight: 500;
+            padding: 5px;
+            font-size: 14px;
+            margin-top: 35px;
+            margin-bottom: 5px;
+            color:#333;
+        }
+        .setwidth
+        {
+            width: 170px;display: inline-block;
+        }
+        .ans {
+            padding: 5px; font-weight: 300; color: #000;
+            line-height: 20px;
+        }
+
+        .addPadding {
+            padding-top: 10px;
+
+        }
+        .highlight{
+
+            padding-right: 10px; font-weight: 400;
+        }
+        a{text-decoration:none}
+        img{
+            max-width: 100%;padding: 30px 0;
+        }
+    </style>
+
+</head>
+<body>
+<div class="highlight"><h3>Link to our application "mejelly" <a target="_blank" href="http://mejelly.com">http://mejelly.com</a></h3></div>
+    <div>
+      <div class="qn">Think about how to classify each of the types of content on your site. Articles, comments on articles, news items, questions and answers, documents to be approved or rejected with comments, and so on. Each type of content will require a different flavor of data model and moderation/approval/versioning process.</div>
+      <div class="ans"><b>Our translation platform content types:</b><br />
+      <ul>
+        <li>Original articles in English</li>
+        <li>Translated contents in Thai</li>
+        <li>Comments on Translated content page</li>
+      </ul>
+The original articles in English will store on database. It is a content that user want to translate into Thai. We will store the translated contents and comments on Gist which also provide version control system. An admin can flag an article if it has an inappropriate content, so the flagged articles will be hidden and cannot be accessed.</div>
+      <div class="qn">Design your content data model and discuss the implications of your design choices with potential users of the system. In general, there should be at least one category of user-submitted content with authoring workflow specific to your project and at least one question and answer forum. However, the specifics will be very dependent on your project’s requirements. Document the design and your discussions on your site.</div>
+      <div class="ans">
+        <img src="https://cloud.githubusercontent.com/assets/1741387/19999755/ce4fafce-a2a6-11e6-9c00-3b6df2f821db.png"/></div>
+      <div class="qn">Specify the workflow for each kind of content on your site and discuss the implications of your design choices with potential users of the system. Document the workflow design and your discussions on your site.</div>
+      <div class="ans"><img src="https://cloud.githubusercontent.com/assets/1741387/20001437/bb134f80-a2ae-11e6-92a8-75ced817f820.png"/></div>
+      <div class="qn">Design your versioning system. What is the versioning system for each type of content? Do you need a complete history of every version, or just a current version with the author of the last version? Make sure you think carefully about the needs of the user community. Document the versioning design on your site.</div>
+      <div class="ans">We need versioning system for the translated content. We are going to store them on Gist via its API (revision concept is similar to git) and it provides a new revision every time the user save the translation. Users can view all revision of the translated contents, and they can copy some part of the text from an old revision and update as the latest revision.</div>
+      <div class="qn"> Write UATs for a “skeletal” implementation of the workflow for at least one type of content on your site then get the UATs to pass. Users should be able to get something up on your server and see it published.</div>
+
+    </div>
+</body>
+</html>
