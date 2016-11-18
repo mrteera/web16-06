@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Me Jelly</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            padding: 10px;
+            color: #2E2F30;
+            margin: 0 300px;
+            font-size: 14px;
+            line-height: 18px;
+        }
+
+        .qn {
+            font-weight: 500;
+            padding: 5px;
+            font-size: 14px;
+            margin-top: 35px;
+            margin-bottom: 5px;
+            color:#333;
+        }
+        .setwidth
+        {
+            width: 170px;display: inline-block;
+        }
+        .ans {
+            padding: 5px; font-weight: 300; color: #000;
+            line-height: 20px;
+        }
+
+        .addPadding {
+            padding-top: 10px;
+
+        }
+        .highlight{
+
+            padding-right: 10px; font-weight: 400;
+        }
+        a{
+            text-decoration:none;
+            color: blue;
+        }
+        img{
+            max-width: 100%;padding: 30px 0;
+        }
+    </style>
+
+</head>
+<body>
+<div class="highlight"><h3>Link to our application "mejelly" <a target="_blank" href="https://demo.mejelly.com">https://demo.mejelly.com</a></h3></div>
+    <div>
+      <div class="qn">Feedback for web 11</div>
+      
+      <div class="ans">
+      <pre>
+Web 11: Carpool Trip
+Members:
+Sainath Reddy
+Anubhav Rana
+
+We evaluated the system on web11's localhost
+Current users focus: around AIT area
+
+1. Understand what the Carpool Trip is trying to do
+The Carpool Trip is about sharing rides. For example, a driver will announce his destination and preferences
+(e.g. specific gender, music, smoking, non-smoking, etc.), then a passenger can make a request to join the ride if he is going to the same destination. The notification will appear for the driver to accept or reject.
+
+2. Is Data model sufficient?
+In schema.db there are 2 major models:
+create_table "driverrides", force: :cascade do |t|
+  t.string   "origin"
+  t.string   "destination"
+  t.time     "departuretime"
+  t.string   "departuredate"
+  t.string   "okwithgender"
+  t.string   "okwith"
+  t.string   "sharegasmoney"
+  t.integer  "seatsavailable"
+  t.text     "description"
+  t.datetime "created_at"
+  t.datetime "updated_at"
+  t.integer  "user_id"
+  t.index ["user_id"], name: "index_driverrides_on_user_id", using: :btree
+end
+create_table "passengerrides", force: :cascade do |t|
+  t.string   "origin"
+  t.string   "destination"
+  t.time     "departuretime"
+  t.string   "departuredate"
+  t.string   "okwithgender"
+  t.string   "okwith"
+  t.string   "sharegasmoney"
+  t.text     "description"
+  t.datetime "created_at"
+  t.datetime "updated_at"
+  t.integer  "user_id"
+  t.index ["user_id"], name: "index_passengerrides_on_user_id", using: :btree
+end
+
+They also have Users and Roles models. Overall the models look ok. But maybe they need another model or 3rd party data source to store and handle notifications.
+
+3. Check if authentication/authorization system is reasonable
+Web11 have used Devise, which provides a good validation, but we also suggest that it would be good to have an e-mail verification too.
+We tried to be a driver and get a ride from ourselves, but the system did not allow (CanCanCan). This is good!
+
+4. Overall experience
+Web page looks nice and clean. We think the users will use this system mostly from their mobile phones.  So, we think they also need to focus on user experience on the mobile devices.
+Here is the website that might help: https://www.google.com/webmasters/tools/mobile-friendly/
+
+5. More opinions
+    1. Deploy the system on the server, so that we can try it on a mobile phone
+    2. About e-mail verification, there is another way without verifying e-mail like Facebook login (Omniauth)
+
+Evaluated By:
+web6 - Translation Community
+Members:
+Reshma Dangol (st118686)
+Teera Laiteerapong (st118950)
+</pre>
+      </div>
+      <div class="qn">Feedback for web 12</div>
+      <div class="ans">
+      <pre>
+Web 12: The comparison of the coordinates of the images
+Member: Rakesh Reddy
+
+We evaluated the system on web12's localhost
+Current users focus: instructors and students in applied machine vision subject
+
+1. Understand what this system is trying to do
+The Instructor needs to be able to create a homework and upload the answer image.
+The student needs to be able to upload his answer image to the system to compare with the instructor's image, then the system will return the result of the comparison.
+
+2. Is data model is sufficient?
+Here is the schema:
+create_table "images", force: :cascade do |t|
+  t.string   "name"
+  t.text     "content"
+  t.datetime "created_at",            null: false
+  t.datetime "updated_at",            null: false
+  t.string   "homework_file_name"
+  t.string   "homework_content_type"
+  t.integer  "homework_file_size"
+  t.datetime "homework_updated_at"
+end
+
+So far, web12 has only implemented a data model for storing image data.
+Thus, the data model is not sufficient according to the system needs.
+Our suggested data models:
+ - Users
+ - Roles
+ - ProblemSets
+ - StudentSolutions
+
+3. Check if authentication/authorization system is reasonable
+Currently, there is no authentication and authorization in the system. We think he can implement it with Devise and CanCanCan, so that students will not be able to make changes in instructor's contents, and vice versa.
+
+4. Overall experience
+The current state of the system still needs a lot more development. Image upload form works, we can upload images. It does not accept file format other than image file types. In the home page, it would be better to show the thumbnail of the images rather than the file path.
+
+5. More opinions
+    1. There should be some simple CSS implementation so that the users feel happy when they visit the website.
+    2. It would be better if the working system is hosted on the  production server, this way we could try to upload images to compare.
+
+Evaluated By:
+web6 - Translation Community
+Members:
+Reshma Dangol (st118686)
+Teera Laiteerapong (st118950)
+      </pre>
+      </div>
+    </div>
+</body>
+</html>
